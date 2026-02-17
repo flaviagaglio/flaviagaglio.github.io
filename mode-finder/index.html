@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Mode Finder · Flavia Gaglio</title>
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d0b1a 0%, #1a142b 100%);
+            color: #f0e9ff;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            animation: fadeInBody 1.2s ease-out;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(20, 15, 35, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 1.8rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(157, 78, 221, 0.3) inset;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: box-shadow 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 3rem;
+            }
+        }
+
+        /* Titolo */
+        .hero-title {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(120deg, #f0e9ff, #c77dff, #9d4edd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            filter: drop-shadow(0 10px 20px rgba(157, 78, 221, 0.4));
+            animation: floatTitle 3s infinite ease-in-out;
+            margin-bottom: 0.3rem;
+        }
+
+        .byline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #c7b9ff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(157, 78, 221, 0.3);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes floatTitle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .sub {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #c7b9ff;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Selettore area */
+        .selector-area {
+            background: rgba(10, 8, 20, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 28px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .selector-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #9d4edd;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .note-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+        }
+
+        .note-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid #3c2a5a;
+            color: #e0d0ff;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (min-width: 480px) {
+            .note-btn {
+                width: 70px;
+                height: 70px;
+                font-size: 1.4rem;
+            }
+        }
+
+        .note-btn:active {
+            transform: scale(0.95);
+            background: rgba(157, 78, 221, 0.4);
+        }
+
+        .note-btn.selected {
+            background: #9d4edd;
+            border-color: #f0e9ff;
+            color: #0d0b1a;
+            box-shadow: 0 0 25px #9d4edd;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(45deg, #9d4edd, #c77dff);
+            color: #0d0b1a;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            display: block;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.4);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .calculate-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 5px 10px rgba(157, 78, 221, 0.7);
+        }
+
+        .modes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            margin-top: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @media (min-width: 600px) {
+            .modes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .modes-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mode-card {
+            background: rgba(30, 20, 45, 0.9);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border-left: 6px solid;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            transition: transform 0.2s;
+            opacity: 0;
+            animation: cardAppear 0.4s forwards;
+            animation-delay: calc(0.05s * var(--i));
+        }
+
+        @keyframes cardAppear {
+            to { opacity: 1; }
+            from { opacity: 0; }
+        }
+
+        .mode-card.major {
+            border-left-color: #f72585;
+        }
+
+        .mode-card.minor {
+            border-left-color: #ff9e00;
+        }
+
+        .mode-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .mode-type {
+            font-size: 0.7rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 400;
+            color: #ddd;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .mode-notes {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.8rem;
+            border-radius: 40px;
+            color: #f0e9ff;
+            word-break: break-word;
+            border: 1px solid #9d4edd;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            color: #6a5a8a;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(157, 78, 221, 0.3);
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-title">
+            <h1>🎼 MODE FINDER</h1>
+            <div class="byline">by Flavia Gaglio</div>
+        </div>
+        <p class="sub">ogni nota · tutti i modi</p>
+
+        <div class="selector-area">
+            <div class="selector-label">scegli la fondamentale</div>
+            <div class="note-grid" id="noteGrid"></div>
+            <button class="calculate-btn" id="calculate">✨ svela i modi ✨</button>
+        </div>
+
+        <div id="modes-container" class="modes-grid"></div>
+
+        <footer>maggiore · rosa | minore · arancio</footer>
+    </div>
+
+    <script>
+        (function() {
+            // ---------- Costanti ----------
+            const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+            const MAJOR_SCALE_INTERVALS = [2, 2, 1, 2, 2, 2, 1];
+            const MODE_NAMES = ["Ionico", "Dorico", "Frigio", "Lidio", "Misolidio", "Eolio", "Locrio"];
+            const MODE_IS_MAJOR = [true, false, false, true, true, false, false];
+
+            // ---------- Stato ----------
+            let selectedNoteIndex = 0;
+
+            // ---------- DOM ----------
+            const noteGrid = document.getElementById('noteGrid');
+            const modesContainer = document.getElementById('modes-container');
+            const calculateBtn = document.getElementById('calculate');
+
+            // ---------- Crea griglia note ----------
+            NOTE_NAMES.forEach((note, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'note-btn' + (index === 0 ? ' selected' : '');
+                btn.textContent = note;
+                btn.dataset.index = index;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.note-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedNoteIndex = index;
+                });
+                noteGrid.appendChild(btn);
+            });
+
+            // ---------- Funzioni di calcolo ----------
+            function buildMajorScale(rootIndex) {
+                const scale = [rootIndex];
+                let current = rootIndex;
+                for (let interval of MAJOR_SCALE_INTERVALS) {
+                    current = (current + interval) % 12;
+                    scale.push(current);
+                }
+                scale.pop(); // rimuovi ottava
+                return scale;
+            }
+
+            function generateModes(rootIndex) {
+                const majorScale = buildMajorScale(rootIndex);
+                const modes = [];
+                for (let i = 0; i < 7; i++) {
+                    const modeIndices = [];
+                    for (let j = 0; j < 7; j++) {
+                        modeIndices.push(majorScale[(i + j) % 7]);
+                    }
+                    modes.push({
+                        name: MODE_NAMES[i],
+                        isMajor: MODE_IS_MAJOR[i],
+                        notes: modeIndices.map(idx => NOTE_NAMES[idx])
+                    });
+                }
+                return modes;
+            }
+
+            // ---------- Render con animazione ----------
+            function renderModes(rootIndex) {
+                const modes = generateModes(rootIndex);
+                let html = '';
+                modes.forEach((mode, idx) => {
+                    const modeClass = mode.isMajor ? 'major' : 'minor';
+                    const typeLabel = mode.isMajor ? 'maggiore' : 'minore';
+                    const notesStr = mode.notes.join(' · ');
+                    html += `
+                        <div class="mode-card ${modeClass}" style="--i: ${idx + 1}">
+                            <div class="mode-name">
+                                ${mode.name} <span class="mode-type">${typeLabel}</span>
+                            </div>
+                            <div class="mode-notes">${notesStr}</div>
+                        </div>
+                    `;
+                });
+                modesContainer.innerHTML = html;
+            }
+
+            // ---------- Evento calcolo ----------
+            calculateBtn.addEventListener('click', () => {
+                renderModes(selectedNoteIndex);
+            });
+
+            // ---------- Mostra i modi di C all'avvio ----------
+            renderModes(0);
+        })();
+    </script>
+</body>
+</html>
