@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Keys · Flavia Gaglio</title>
-    <!-- Font Google -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,60 +14,85 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
+            padding: 1rem;
         }
         .container {
             max-width: 1300px;
             width: 100%;
             background: rgba(255, 245, 235, 0.8);
             backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 2.5rem;
+            border-radius: 30px;
+            padding: 1.5rem;
             box-shadow: 0 30px 50px rgba(180, 100, 50, 0.3);
             border: 2px solid rgba(255, 255, 255, 0.7);
         }
+        @media (min-width: 768px) {
+            .container {
+                padding: 2.5rem;
+                border-radius: 50px;
+            }
+        }
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 900;
             color: #8b5a2b;
             text-align: center;
             text-shadow: 2px 2px 0 #f0d5b0;
             margin-bottom: 0.5rem;
         }
+        @media (min-width: 768px) {
+            h1 { font-size: 4rem; }
+        }
         .byline {
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #b07d44;
             font-style: italic;
             border-bottom: 2px dotted #c9a77b;
             display: inline-block;
             padding-bottom: 0.3rem;
-            margin: 0 auto 2rem;
+            margin: 0 auto 1.5rem;
             width: auto;
             display: table;
         }
+        @media (min-width: 768px) {
+            .byline { font-size: 1.3rem; margin-bottom: 2rem; }
+        }
         .selector-area {
             background: rgba(250, 235, 215, 0.9);
-            border-radius: 40px;
-            padding: 2rem;
-            margin-bottom: 2.5rem;
+            border-radius: 30px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
             border: 2px solid #dbb88c;
             box-shadow: inset 0 2px 5px rgba(255,255,255,0.5), 0 10px 20px rgba(140,80,30,0.2);
+        }
+        @media (min-width: 768px) {
+            .selector-area {
+                padding: 2rem;
+                border-radius: 40px;
+            }
         }
         .selector-label {
             text-align: center;
             color: #7a4e2e;
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
             font-weight: 700;
+        }
+        @media (min-width: 768px) {
+            .selector-label {
+                font-size: 1rem;
+                letter-spacing: 3px;
+                margin-bottom: 1.5rem;
+            }
         }
         .note-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
+            gap: 0.5rem;
             justify-content: center;
             margin-bottom: 1rem;
         }
@@ -76,15 +100,31 @@
             background: #fff7ed;
             border: 2px solid #c9a077;
             color: #5e3a1f;
-            padding: 1rem 1.5rem;
-            border-radius: 40px;
+            padding: 0.6rem 0.8rem;
+            border-radius: 30px;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             font-family: 'Playfair Display', serif;
             cursor: pointer;
-            box-shadow: 0 6px 0 #b28b5c;
+            box-shadow: 0 4px 0 #b28b5c;
             transition: all 0.1s ease;
-            min-width: 90px;
+            min-width: 70px;
+            flex: 0 1 auto;
+        }
+        @media (min-width: 480px) {
+            .note-btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 1rem;
+                min-width: 80px;
+            }
+        }
+        @media (min-width: 768px) {
+            .note-btn {
+                padding: 1rem 1.5rem;
+                font-size: 1.2rem;
+                min-width: 90px;
+                box-shadow: 0 6px 0 #b28b5c;
+            }
         }
         .note-btn:active {
             transform: translateY(4px);
@@ -94,25 +134,38 @@
             background: #e7b183;
             border-color: #a5662b;
             color: #2d1e0f;
-            box-shadow: 0 6px 0 #7a4e2e;
+            box-shadow: 0 4px 0 #7a4e2e;
+        }
+        @media (min-width: 768px) {
+            .note-btn.selected {
+                box-shadow: 0 6px 0 #7a4e2e;
+            }
         }
         .calculate-btn {
             background: #c9a077;
             color: #2d1e0f;
             border: none;
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
+            padding: 1rem 2rem;
+            border-radius: 40px;
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             cursor: pointer;
             width: 100%;
-            max-width: 400px;
-            margin: 1.5rem auto 0;
+            max-width: 350px;
+            margin: 1rem auto 0;
             display: block;
             text-transform: uppercase;
-            box-shadow: 0 10px 0 #7a4e2e;
+            box-shadow: 0 8px 0 #7a4e2e;
             border: 2px solid #ffe7cf;
             transition: all 0.1s ease;
+        }
+        @media (min-width: 768px) {
+            .calculate-btn {
+                padding: 1.2rem 3rem;
+                font-size: 1.3rem;
+                max-width: 400px;
+                box-shadow: 0 10px 0 #7a4e2e;
+            }
         }
         .calculate-btn:active {
             transform: translateY(6px);
@@ -120,61 +173,66 @@
         }
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
             margin-top: 2rem;
+        }
+        @media (min-width: 600px) {
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
         }
         .result-card {
             background: #fff7ed;
-            border-radius: 30px;
-            padding: 2rem 1.5rem;
+            border-radius: 25px;
+            padding: 1.5rem;
             border: 2px solid #dbb88c;
-            box-shadow: 0 15px 25px rgba(150,80,30,0.2);
+            box-shadow: 0 10px 20px rgba(150,80,30,0.2);
             text-align: center;
         }
         .key-name {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             color: #5e3a1f;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+        @media (min-width: 768px) {
+            .key-name { font-size: 2.5rem; }
         }
         .relative-minor {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #b07d44;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-style: italic;
         }
         .accidentals-count {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #7a4e2e;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
         }
         .accidentals-list {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-family: 'Playfair Display', serif;
             background: #fae1c6;
-            padding: 1rem;
-            border-radius: 50px;
+            padding: 0.8rem;
+            border-radius: 40px;
             display: inline-block;
             border: 2px solid #c9a077;
         }
         .accidental-note {
             display: inline-block;
-            margin: 0 0.3rem;
+            margin: 0 0.2rem;
             font-weight: 700;
         }
         .sharp { color: #bc6c25; }
         .flat { color: #a47148; }
-        footer {
-            margin-top: 3rem;
-            text-align: center;
-            color: #b28b5c;
-            font-size: 1rem;
-            border-top: 2px dashed #dbb88c;
-            padding-top: 1.5rem;
-        }
     </style>
 </head>
 <body>
@@ -193,7 +251,6 @@
 
     <script>
         (function() {
-            // Mappe delle armature (invariate)
             const MAJOR_SIGNATURES = {
                 "Do":    { count: 0, type: 'none', accidentals: [] },
                 "Do♯":   { count: 7, type: '#', accidentals: ["Fa♯", "Do♯", "Sol♯", "Re♯", "La♯", "Mi♯", "Si♯"] },
@@ -212,13 +269,11 @@
                 "Si":    { count: 5, type: '#', accidentals: ["Fa♯", "Do♯", "Sol♯", "Re♯", "La♯"] }
             };
 
-            // Etichette
             const NOTE_LABELS = [
                 "Do", "Sol", "Re", "La", "Mi", "Si/Do♭", "Fa♯/Sol♭", "Re♭/Do♯",
                 "La♭", "Mi♭", "Si♭", "Fa"
             ];
 
-            // Associazioni (nomi con simboli)
             const TONALITA_PER_ETICHETTA = {
                 "Do": [ { maggiore: "Do", minore: "La" } ],
                 "Sol": [ { maggiore: "Sol", minore: "Mi" } ],
@@ -244,12 +299,10 @@
             };
 
             let selectedIndex = 0;
-
             const noteGrid = document.getElementById('noteGrid');
             const calculateBtn = document.getElementById('calculate');
             const resultsContainer = document.getElementById('resultsContainer');
 
-            // Crea pulsanti con le etichette pulite
             NOTE_LABELS.forEach((label, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'note-btn' + (idx === 0 ? ' selected' : '');
