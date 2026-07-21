@@ -1,218 +1,1056 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flavia Gaglio - Portfolio</title>
-    <!-- Font Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet">
-    <!-- Font Awesome per icone -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flavia Gaglio — AI Engineer &amp; Security Researcher</title>
+<meta name="description" content="Flavia Gaglio — AI Engineer specializing in machine learning, biometrics and cybersecurity. Bachelor's in Computer Engineering, Master's in AI &amp; Cybersecurity. Also a musician.">
+<meta name="theme-color" content="#0d0f10">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Flavia Gaglio — AI Engineer &amp; Security Researcher">
+<meta property="og:description" content="Portfolio of Flavia Gaglio: machine learning, biometrics, cybersecurity and music.">
+<meta property="og:image" content="images/foto.jpg">
+<meta property="og:type" content="website">
+
+<!-- Fonts: Poppins for display, Inter for body, JetBrains Mono for data/labels -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Font Awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<style>
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+ul { list-style: none; }
+button { font: inherit; cursor: pointer; }
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* color */
+  --bg:            #0d0f10;
+  --bg-elevated:   #16191b;
+  --bg-elevated-2: #1c2123;
+  --border:         #262b2d;
+  --text:          #f2f4f3;
+  --text-muted:    #a6afac;
+  --text-faint:    #6d7674;
+  --accent:        #00d4aa;
+  --accent-dim:    rgba(0, 212, 170, 0.12);
+  --accent-glow:   rgba(0, 212, 170, 0.35);
+  --accent-ink:    #05201a; /* dark text used on top of accent backgrounds */
+
+  /* type */
+  --font-display: 'Poppins', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* layout */
+  --max-w: 1160px;
+  --section-pad: clamp(4rem, 8vw, 7rem);
+  --radius: 10px;
+  --radius-sm: 6px;
+
+  /* motion */
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* skip link for keyboard/screen-reader users */
+.skip-link {
+  position: absolute;
+  left: 1rem; top: -3rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  z-index: 1000;
+  transition: top 0.2s var(--ease);
+}
+.skip-link:focus { top: 1rem; }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.eyebrow::before {
+  content: '';
+  width: 22px; height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  margin-bottom: 2.5rem;
+  max-width: 32ch;
+}
+
+/* ============================================================
+   LAYOUT HELPERS
+   ============================================================ */
+.wrap {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+}
+section { padding-block: var(--section-pad); }
+
+/* reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   SIGNAL LINE — signature motif (audio waveform / signal spike,
+   echoes both her music practice and ML activation signals)
+   ============================================================ */
+.signal-divider {
+  width: 100%;
+  height: 48px;
+  overflow: hidden;
+  opacity: 0.55;
+}
+.signal-divider svg { width: 100%; height: 100%; display: block; }
+.signal-path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  transition: stroke-dashoffset 1.6s var(--ease);
+}
+.signal-divider.is-visible .signal-path { stroke-dashoffset: 0; }
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13, 15, 16, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding: 1.1rem clamp(1.25rem, 5vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  position: relative;
+  padding-bottom: 3px;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.25s var(--ease);
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--text); }
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0.4rem;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+}
+.hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#home {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 3rem;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.hero-kicker {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.hero-name {
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  color: var(--text-muted);
+  min-height: 1.8em;
+  margin-bottom: 1.5rem;
+}
+.hero-role .cursor {
+  display: inline-block;
+  width: 2px;
+  background: var(--accent);
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-tagline {
+  max-width: 46ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 2.2rem;
+}
+
+.cta-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.4rem; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform 0.2s var(--ease), background 0.2s, border-color 0.2s;
+}
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--accent-glow); }
+.btn-ghost { border-color: var(--border); color: var(--text); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+.social-links { display: flex; gap: 1.4rem; }
+.social-links a {
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  transition: color 0.2s, transform 0.2s;
+}
+.social-links a:hover { color: var(--accent); transform: translateY(-3px); }
+
+.hero-visual { position: relative; justify-self: center; }
+.photo-frame {
+  position: relative;
+  width: min(320px, 78vw);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+.photo-frame::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(0,212,170,0.15);
+  pointer-events: none;
+}
+.hero-waveform {
+  position: absolute;
+  bottom: -18px; left: 50%;
+  transform: translateX(-50%);
+  width: 130%;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about .about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+#about p { color: var(--text-muted); margin-bottom: 1.1rem; max-width: 62ch; }
+#about p:last-of-type { margin-bottom: 0; }
+
+.facts {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+.fact { display: flex; flex-direction: column; gap: 0.2rem; }
+.fact .fact-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.fact .fact-value { font-size: 0.98rem; color: var(--text); }
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skills-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.8rem;
+}
+.skill-category {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  background: var(--bg-elevated);
+}
+.skill-category h3 {
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.skill-category h3 i { font-size: 0.95rem; }
+.pill-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.pill {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.pill:hover { border-color: var(--accent); color: var(--text); }
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.6rem;
+}
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+.card-thumb {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--accent);
+  background:
+    radial-gradient(circle at 30% 20%, var(--accent-dim), transparent 60%),
+    var(--bg-elevated-2);
+  border-bottom: 1px solid var(--border);
+}
+/* replace .card-thumb with a real <img loading="lazy" ...> when you have screenshots */
+.card-body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
+.project-card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
+.project-card p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; flex: 1; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.1rem; }
+.tech-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+.card-links { display: flex; gap: 1.2rem; }
+.card-links a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.card-links a:hover { color: var(--text); }
+
+/* ============================================================
+   EXPERIENCE / EDUCATION — genuine chronology, numbered markers earn their keep here
+   ============================================================ */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.5rem;
+  padding-block: 1.6rem;
+  border-top: 1px solid var(--border);
+}
+.timeline-item:last-child { border-bottom: 1px solid var(--border); }
+.timeline-num {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95rem;
+  padding-top: 0.2rem;
+}
+.timeline-content h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+.timeline-content .meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.timeline-content p { color: var(--text-muted); max-width: 60ch; font-size: 0.95rem; }
+.status-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.15rem 0.5rem;
+  border-radius: 30px;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+.contact-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.contact-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.contact-card i {
+  font-size: 1.3rem;
+  color: var(--accent);
+  width: 2.2rem;
+  text-align: center;
+}
+.contact-card .label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  display: block;
+}
+.contact-card .value { font-size: 0.95rem; word-break: break-word; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .cta-row, .social-links { justify-content: center; }
+  .hero-tagline { margin-inline: auto; }
+  .hero-visual { order: -1; }
+  #about .about-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .nav-links {
+    position: fixed;
+    top: 64px; right: 0;
+    height: calc(100vh - 64px);
+    width: min(78vw, 300px);
+    background: var(--bg-elevated);
+    border-left: 1px solid var(--border);
+    flex-direction: column;
+    padding: 2.5rem 2rem;
+    gap: 1.8rem;
+    transform: translateX(100%);
+    transition: transform 0.3s var(--ease);
+  }
+  .nav-links.is-open { transform: translateX(0); }
+  .hamburger { display: flex; }
+  .timeline-item { grid-template-columns: 40px 1fr; }
+}
+</style>
 </head>
 <body>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+<a href="#home" class="skip-link">Skip to content</a>
+
+<header>
+  <div class="nav-inner">
+    <a href="#home" class="logo">Flavia<span>.</span>Gaglio</a>
+    <nav id="primary-nav">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
 
-    <main>
-        <section id="home">
-            <!-- Nome -->
-            <h1 class="name">Flavia Gaglio</h1>
-            
-            <img src="images/foto.jpg" alt="Flavia Gaglio" class="profile-photo">
-            
-            
-            <p class="mixing-text" id="mixing-text">Developer</p>
-            
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/flavia-gaglio-4a30b0335/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/flaviagaglio" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.instagram.com/flaviagaglio/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@ziggystardustzz" target="_blank"><i class="fab fa-youtube"></i></a>
+<main id="home">
+
+  <!-- ============ HERO ============ -->
+  <section aria-label="Introduction" style="padding-top:1rem;">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hero-kicker">AI Engineer · Security Researcher</p>
+        <h1 class="hero-name">Flavia Gaglio</h1>
+        <p class="hero-role" id="hero-role" aria-live="polite">AI Engineer<span class="cursor"></span></p>
+        <p class="hero-tagline">I build machine learning systems and study the ways they can be broken — with a Bachelor's in Computer Engineering and a Master's underway in AI &amp; Cybersecurity. Off-screen, I play guitar, piano and bass.</p>
+        <div class="cta-row">
+          <a href="#projects" class="btn btn-primary"><i class="fas fa-arrow-down"></i> View my projects</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/flavia-gaglio-4a30b0335/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/flaviagaglio" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/flaviagaglio/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ziggystardustzz" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="photo-frame">
+          <img src="images/foto.jpg" alt="Portrait of Flavia Gaglio" loading="lazy">
+        </div>
+        <div class="hero-waveform" aria-hidden="true">
+          <svg viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg">
+            <path class="signal-path is-visible" d="M0,30 L20,30 L35,10 L50,50 L65,18 L80,42 L95,30 L120,30 L135,6 L150,54 L165,24 L180,36 L195,30 L220,30 L235,14 L250,46 L265,20 L280,40 L295,30 L320,30 L335,8 L350,52 L365,22 L380,38 L395,30 L420,30 L435,12 L450,48 L465,26 L480,34 L495,30 L520,30 L535,16 L550,44 L565,28 L580,32 L600,30"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="signal-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="signal-path" d="M0,24 L60,24 L80,4 L100,44 L120,10 L140,38 L160,24 L220,24 L240,2 L260,46 L280,14 L300,34 L320,24 L380,24 L400,6 L420,42 L440,16 L460,32 L480,24 L540,24 L560,8 L580,40 L600,18 L620,30 L640,24 L700,24 L720,4 L740,44 L760,10 L780,38 L800,24 L860,24 L880,2 L900,46 L920,14 L940,34 L960,24 L1020,24 L1040,6 L1060,42 L1080,16 L1100,32 L1120,24 L1200,24"/>
+    </svg>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="wrap">
+      <p class="eyebrow reveal">About</p>
+      <h2 class="section-title reveal">Structure, improvisation, and attention to detail</h2>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>I hold a Bachelor's degree in Computer Engineering and I'm currently pursuing a Master's in Artificial Intelligence and Cybersecurity. My academic path has given me a strong foundation in problem-solving, system design and security — and a deep curiosity for how technology intersects with creativity.</p>
+          <p>Outside the tech world, music is my other language. I play guitar, piano and bass, drawn to experimental soundscapes, ethereal ambient textures, raw blues and world-infused melodies. For me, music is a way of thinking that shapes how I approach code: with structure, improvisation and attention to detail.</p>
+          <p>I'm looking for opportunities where I can bring together my technical skills and my creative side — building things that are not only functional, but meaningful.</p>
+        </div>
+        <div class="facts reveal">
+          <div class="fact">
+            <span class="fact-label">Education</span>
+            <span class="fact-value">B.Eng Computer Engineering</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Currently</span>
+            <span class="fact-value">M.Sc AI &amp; Cybersecurity (in progress)</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Focus areas</span>
+            <span class="fact-value">Machine learning, biometrics, security</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Also</span>
+            <span class="fact-value">Guitar, piano, bass — sound design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills">
+    <div class="wrap">
+      <p class="eyebrow reveal">Skills</p>
+      <h2 class="section-title reveal">Tools I reach for</h2>
+      <div class="skills-categories reveal">
+        <div class="skill-category">
+          <h3><i class="fas fa-brain"></i> AI &amp; Machine Learning</h3>
+          <div class="pill-list">
+            <span class="pill">Machine Learning</span>
+            <span class="pill">Python</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-shield-halved"></i> Security &amp; Biometrics</h3>
+          <div class="pill-list">
+            <span class="pill">Cybersecurity</span>
+            <span class="pill">Biometrics</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-code"></i> Programming &amp; Systems</h3>
+          <div class="pill-list">
+            <span class="pill">C</span>
+            <span class="pill">Java</span>
+            <span class="pill">SQL</span>
+            <span class="pill">Git</span>
+            <span class="pill">HTML &amp; CSS</span>
+            <span class="pill">UNIX / Linux</span>
+            <span class="pill">Xubuntu</span>
+            <span class="pill">Office Suite</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-music"></i> Music Production</h3>
+          <div class="pill-list">
+            <span class="pill">Logic Pro</span>
+            <span class="pill">Luna</span>
+            <span class="pill">UA Plugins</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects">
+    <div class="wrap">
+      <p class="eyebrow reveal">Projects</p>
+      <h2 class="section-title reveal">Selected work</h2>
+      <div class="projects-grid reveal">
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-pen-nib"></i></div>
+          <div class="card-body">
+            <h3>Handwriting Analysis for Classification</h3>
+            <p>Predictive models in Python to classify handwriting patterns, exploring feature extraction and neural network architectures.</p>
+            <div class="tech-tags"><span>Python</span><span>Neural Networks</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-user-tag"></i></div>
+          <div class="card-body">
+            <h3>Personality Trait Classification via Image Analysis</h3>
+            <p>Machine learning models to predict personality traits from image data, using feature engineering and ensemble methods.</p>
+            <div class="tech-tags"><span>ML</span><span>Ensemble Methods</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-notes-medical"></i></div>
+          <div class="card-body">
+            <h3>Male Infertility Prediction</h3>
+            <p>Implemented and optimized Decision Trees, MLP and SVM for classifying medical datasets, achieving high accuracy in infertility prediction.</p>
+            <div class="tech-tags"><span>Decision Trees</span><span>MLP</span><span>SVM</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-face-viewfinder"></i></div>
+          <div class="card-body">
+            <h3>Facial Authentication System</h3>
+            <p>Designed and evaluated a facial recognition system using MTCNN for face detection and InceptionResNetV1 for feature extraction.</p>
+            <div class="tech-tags"><span>MTCNN</span><span>InceptionResNetV1</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-fingerprint"></i></div>
+          <div class="card-body">
+            <h3>Vulnerability Analysis in Biometric Systems</h3>
+            <p>Bachelor's thesis: comparative study of attack methods on biometric authentication and corresponding countermeasures.</p>
+            <div class="tech-tags"><span>Biometrics</span><span>Security</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-comment-dots"></i></div>
+          <div class="card-body">
+            <h3>Emotion Detection in Italian Text</h3>
+            <p>Fine-tuned a BERT-based transformer (emotivITA) to identify emotional dimensions in Italian datasets.</p>
+            <div class="tech-tags"><span>BERT</span><span>NLP</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-record-vinyl"></i></div>
+          <div class="card-body">
+            <h3>Vinyl Lottery — Client-Server System</h3>
+            <p>Concurrent client-server application in C on Linux using TCP/IP, threads and System V IPC for a vinyl lottery game.</p>
+            <div class="tech-tags"><span>C</span><span>TCP/IP</span><span>System V IPC</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-border-none"></i></div>
+          <div class="card-body">
+            <h3>Tic Tac Toe — Client-Server Game</h3>
+            <p>Networked Tic Tac Toe game in Java with object-oriented design and client-server architecture.</p>
+            <div class="tech-tags"><span>Java</span><span>OOP</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-tower-broadcast"></i></div>
+          <div class="card-body">
+            <h3>Wireless Sensor Network for Dehumidifier Control</h3>
+            <p>Simulated a wireless sensor network in MATLAB (TrueTime) with fuzzy logic control for a dehumidification system.</p>
+            <div class="tech-tags"><span>MATLAB</span><span>Fuzzy Logic</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-plane"></i></div>
+          <div class="card-body">
+            <h3>Airport Flight Database</h3>
+            <p>Conceptual, logical and physical design of an SQL database to simulate airport flight operations.</p>
+            <div class="tech-tags"><span>SQL</span><span>Database Design</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-chart-line"></i></div>
+          <div class="card-body">
+            <h3>Variance Test: Theory and Applications</h3>
+            <p>MATLAB project exploring variance testing methodologies and their practical applications.</p>
+            <div class="tech-tags"><span>MATLAB</span><span>Statistics</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-square-root-variable"></i></div>
+          <div class="card-body">
+            <h3>Numerical Integration: Quadrature Methods</h3>
+            <p>Comprehensive MATLAB study on quadrature formulas and numerical integration techniques.</p>
+            <div class="tech-tags"><span>MATLAB</span><span>Numerical Methods</span></div>
+            <div class="card-links"><a href="#contact"><i class="fas fa-envelope"></i> Contact for details</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-key"></i></div>
+          <div class="card-body">
+            <h3>PASSWORDS — Password Generator</h3>
+            <p>Password generator with a pixel aesthetic. Customize length and character types, and watch the real-time strength meter.</p>
+            <div class="tech-tags"><span>JavaScript</span><span>HTML/CSS</span></div>
+            <div class="card-links">
+              <a href="https://flaviagaglio.github.io/passwords/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Live demo</a>
+              <a href="https://github.com/flaviagaglio/passwords" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>
             </div>
-        </section>
+          </div>
+        </article>
 
-        <section id="about">
-            <h2>About Me</h2>
-            <p>I hold a Bachelor's degree in Computer Engineering and I'm currently pursuing a Master's in Artificial Intelligence and Cybersecurity. My academic journey has given me a strong foundation in problem-solving, system design, and security – but also a deep curiosity for how technology can intersect with creativity.</p>
-            <p>Outside the tech world, music is my other language. I play guitar, piano and bass; I'm drawn to experimental soundscapes, ethereal ambient textures, raw blues and world-infused melodies. For me, music is a way of thinking that influences how I approach code: with structure, improvisation and attention to detail.</p>
-            <p>I'm looking for opportunities where I can bring together my technical skills and my creative side – building things that are not only functional, but meaningful.</p>
-        </section>
+        <article class="project-card">
+          <div class="card-thumb"><i class="fas fa-music"></i></div>
+          <div class="card-body">
+            <h3>KEYS — Key Signature Finder</h3>
+            <p>Find the key signature of any major or minor tonality: number of accidentals and which notes are sharp or flat.</p>
+            <div class="tech-tags"><span>JavaScript</span><span>Music Theory</span></div>
+            <div class="card-links"><a href="keys/"><i class="fas fa-arrow-up-right-from-square"></i> Try it online</a></div>
+          </div>
+        </article>
 
-      <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-        <!-- Tech Skills -->
-        <li>AI & Machine Learning</li>
-        <li>Biometrics</li>
-        <li>Cybersecurity</li>
-        <li>Python</li>
-        <li>C</li>
-        <li>Java</li>
-        <li>SQL</li>
-        <li>Git</li>
-        <li>HTML & CSS</li>
-        <li>Office Suite</li>
-        <li>UNIX/Linux</li>
-        <li>XUBUNTU</li>
-        <!-- Music Skills -->
-        <li>Logic Pro</li>
-        <li>Luna</li>
-        <li>UA Plugins</li>
-    </ul>
-</section>
+      </div>
+    </div>
+  </section>
 
-        <section id="projects">
-            <h2>My Projects</h2>
-            <div class="projects-grid">
-                <!-- IA: Handwriting Classification -->
-                <div class="project-card">
-                    <h3>Handwriting Analysis for Classification</h3>
-                    <p>Developed predictive models in Python to classify handwriting patterns, exploring feature extraction and neural network architectures.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Machine Learning: Personality Traits from Images -->
-                <div class="project-card">
-                    <h3>Personality Trait Classification via Image Analysis</h3>
-                    <p>Built machine learning models to predict personality traits from image data, using feature engineering and ensemble methods.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- AI&ML: Medical Dataset Classification -->
-                <div class="project-card">
-                    <h3>Male Infertility Prediction</h3>
-                    <p>Implemented and optimized Decision Trees, MLP and SVM for classifying medical datasets, achieving high accuracy in infertility prediction.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Biometric Authentication: Facial Recognition -->
-                <div class="project-card">
-                    <h3>Facial Authentication System</h3>
-                    <p>Designed and evaluated a facial recognition system using MTCNN for face detection and InceptionResNetV1 for feature extraction.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Bachelor Thesis: Biometric Vulnerabilities -->
-                <div class="project-card">
-                    <h3>Vulnerability Analysis in Biometric Systems</h3>
-                    <p>Bachelor's thesis: comparative study of attack methods on biometric authentication and corresponding countermeasures.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Computational Linguistics: Emotion Identification -->
-                <div class="project-card">
-                    <h3>Emotion Detection in Italian Text</h3>
-                    <p>Fine-tuned a BERT-based transformer (emotivITA) to identify emotional dimensions in Italian datasets.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Concurrent Systems: Vinyl Lottery -->
-                <div class="project-card">
-                    <h3>Vinyl Lottery – Client-Server System</h3>
-                    <p>Developed a concurrent client-server application in C on Linux using TCP/IP, threads and System V IPC for a vinyl lottery game.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- OOP: Tic Tac Toe Game -->
-                <div class="project-card">
-                    <h3>Tic Tac Toe – Client-Server Game</h3>
-                    <p>Implemented a networked Tic Tac Toe game in Java with object-oriented design and client-server architecture.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Wireless Sensor Networks: Dehumidifier Control -->
-                <div class="project-card">
-                    <h3>Wireless Sensor Network for Dehumidifier Control</h3>
-                    <p>Simulated a wireless sensor network in MATLAB (TrueTime) with fuzzy logic control for a dehumidification system.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Database: Airport Flight Simulation -->
-                <div class="project-card">
-                    <h3>Airport Flight Database</h3>
-                    <p>Conceptual, logical, and physical design of an SQL database to simulate airport flight operations.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Statistics: Variance Test Analysis -->
-                <div class="project-card">
-                    <h3>Variance Test: Theory and Applications</h3>
-                    <p>MATLAB project exploring variance testing methodologies and their practical applications.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
-                <!-- Numerical Methods: Quadrature Formulas -->
-                <div class="project-card">
-                    <h3>Numerical Integration: Quadrature Methods</h3>
-                    <p>Comprehensive MATLAB study on quadrature formulas and numerical integration techniques.</p>
-                    <a href="#contact" class="contact-link"><i class="fas fa-envelope"></i> Contact me for details</a>
-                </div>
+  <!-- ============ EXPERIENCE / EDUCATION ============ -->
+  <section id="experience">
+    <div class="wrap">
+      <p class="eyebrow reveal">Education</p>
+      <h2 class="section-title reveal">A short, real timeline</h2>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-num">01</div>
+          <div class="timeline-content">
+            <h3>Bachelor's Degree, Computer Engineering</h3>
+            <span class="meta">Completed</span>
+            <p>Built the foundations: algorithms, systems, databases and networking, alongside a thesis on vulnerability analysis in biometric systems.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-num">02</div>
+          <div class="timeline-content">
+            <h3>Master's Degree, Artificial Intelligence &amp; Cybersecurity<span class="status-badge">In progress</span></h3>
+            <span class="meta">Ongoing</span>
+            <p>Deepening machine learning, biometrics and security research, with coursework spanning model design, attack surfaces and defensive countermeasures.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                <!-- Passwords Generator -->
-                <div class="project-card">
-                <h3>PASSWORDS - Passwords Generator</h3>
-                <p>Password generator with glitch effects and pixel aesthetics. Customize length, character types (uppercase, lowercase, numbers, symbols) and watch the real‑time strength meter.</p>
-                <a href="https://flaviagaglio.github.io/passwords/" target="_blank" class="contact-link"><i class="fas fa-external-link-alt"></i> Try it online</a>
-                <a href="https://github.com/flaviagaglio/passwords" target="_blank" class="contact-link" style="margin-left: 1rem;"><i class="fab fa-github"></i> GitHub</a>
-                </div>
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="wrap">
+      <p class="eyebrow reveal">Contact</p>
+      <h2 class="section-title reveal">Let's talk</h2>
+      <div class="contact-grid reveal">
+        <a class="contact-card" href="mailto:flaviagaglio9@gmail.com">
+          <i class="fas fa-envelope"></i>
+          <span><span class="label">Email</span><span class="value">flaviagaglio9@gmail.com</span></span>
+        </a>
+        <a class="contact-card" href="https://www.linkedin.com/in/flavia-gaglio-4a30b0335/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin-in"></i>
+          <span><span class="label">LinkedIn</span><span class="value">Flavia Gaglio</span></span>
+        </a>
+        <a class="contact-card" href="https://github.com/flaviagaglio" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+          <span><span class="label">GitHub</span><span class="value">flaviagaglio</span></span>
+        </a>
+        <a class="contact-card" href="https://www.instagram.com/flaviagaglio/" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i>
+          <span><span class="label">Instagram</span><span class="value">@flaviagaglio</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-                <!-- Keys - Key Signature Finder -->
-                <div class="project-card">
-                    <h3>KEYS – Key Signature Finder</h3>
-                    <p>Find the key signature of any major or minor tonality: number of accidentals and which notes are sharp or flat. Built with HTML, CSS, JavaScript.</p>
-                    <a href="keys/" class="contact-link"><i class="fas fa-external-link-alt"></i> Try it online</a>
-                </div>
-            </div>
-        </section>
-            </div>
-        </section>
+</main>
 
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <p>Email: <a href="mailto:flaviagaglio9@gmail.com">flaviagaglio9@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/flavia-gaglio-4a30b0335/" target="_blank">Flavia Gaglio</a></p>
-            <p>GitHub: <a href="https://github.com/flaviagaglio" target="_blank">flaviagaglio</a></p>
-        </section>
-    </main>
+<footer>
+  <p>&copy; 2026 Flavia Gaglio. All rights reserved.</p>
+</footer>
 
-    <footer>
-        <p>&copy; 2026 Flavia Gaglio. All rights reserved.</p>
-    </footer>
+<script>
+/* ============================================================
+   HAMBURGER MENU
+   ============================================================ */
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
 
-    <!-- effetto lettere  -->
-    <script>
-        const words = ["Developer", "Student", "Musician", "Engineer"];
-        const element = document.getElementById('mixing-text');
-        let currentIndex = 0;
-        let targetWord = words[1];
-        let interval;
-        
-        function mixLetters() {
-            currentIndex = (currentIndex + 1) % words.length;
-            targetWord = words[currentIndex];
-            
-            let iterations = 0;
-            const maxIterations = 10;
-            
-            clearInterval(interval);
-            interval = setInterval(() => {
-                let mixed = '';
-                for (let i = 0; i < targetWord.length; i++) {
-                    if (Math.random() > 0.5 && iterations < maxIterations - 2) {
-                        mixed += String.fromCharCode(33 + Math.floor(Math.random() * 94));
-                    } else {
-                        mixed += targetWord[i];
-                    }
-                }
-                element.textContent = mixed;
-                
-                iterations++;
-                if (iterations >= maxIterations) {
-                    element.textContent = targetWord;
-                    clearInterval(interval);
-                }
-            }, 60);
-        }
-        
-        setInterval(mixLetters, 3000);
-    </script>
+hamburger.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('is-open');
+  hamburger.setAttribute('aria-expanded', String(isOpen));
+});
+
+// close the mobile menu after a link is chosen
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+/* ============================================================
+   ACTIVE NAV LINK ON SCROLL
+   ============================================================ */
+const sections = document.querySelectorAll('main section[id]');
+const navAnchors = document.querySelectorAll('.nav-links a');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navAnchors.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+      });
+    }
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+
+sections.forEach(s => navObserver.observe(s));
+
+/* ============================================================
+   SCROLL REVEAL (fade + slide up), and signal-divider draw-in
+   ============================================================ */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const revealTargets = document.querySelectorAll('.reveal, .signal-divider');
+if (prefersReducedMotion) {
+  revealTargets.forEach(el => el.classList.add('is-visible'));
+} else {
+  const revealObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealTargets.forEach(el => revealObserver.observe(el));
+}
+
+/* ============================================================
+   TYPEWRITER EFFECT — replaces the old "mixing letters" glitch
+   ============================================================ */
+const roles = ['AI Engineer', 'ML Engineer', 'Security Researcher', 'Musician'];
+const roleEl = document.getElementById('hero-role');
+const cursor = roleEl.querySelector('.cursor');
+
+let roleIndex = 0;
+let charIndex = roles[0].length;
+let deleting = false;
+
+function setRoleText(text) {
+  roleEl.childNodes[0].nodeValue = text;
+}
+
+function typeLoop() {
+  const current = roles[roleIndex];
+
+  if (!deleting) {
+    charIndex++;
+    if (charIndex > current.length) {
+      deleting = true;
+      setTimeout(typeLoop, 1600); // pause at full word
+      return;
+    }
+  } else {
+    charIndex--;
+    if (charIndex < 0) {
+      deleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      charIndex = 0;
+    }
+  }
+
+  setRoleText(roles[deleting || charIndex === 0 ? roleIndex : roleIndex].slice(0, charIndex));
+  setTimeout(typeLoop, deleting ? 35 : 65);
+}
+
+if (prefersReducedMotion) {
+  setRoleText(roles[0]);
+  cursor.style.display = 'none';
+} else {
+  // start the loop: first pause on the initial fully-typed word
+  setTimeout(typeLoop, 1600);
+}
+</script>
 </body>
 </html>
