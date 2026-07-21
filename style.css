@@ -311,15 +311,6 @@ header {
   transition: filter 0.5s var(--ease);
 }
 .hero-portrait:hover .portrait-frame img { filter: grayscale(0%) contrast(1); }
-.portrait-caption {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-faint);
-  margin-top: 0.8rem;
-  text-align: center;
-  letter-spacing: 0.04em;
-}
-.portrait-caption span { color: var(--accent); }
 
 /* ============================================================
    ABOUT
