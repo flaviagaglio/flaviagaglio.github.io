@@ -8,7 +8,8 @@ export type ProjectCategory =
   | 'audio'
   | 'astrophysics'
   | 'systems'
-  | 'data';
+  | 'data'
+  | 'music';
 
 export interface ProjectMetric {
   label: string;
@@ -51,6 +52,7 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   astrophysics: 'Astrophysics',
   systems: 'Systems',
   data: 'Data',
+  music: 'Music Theory',
 };
 
 export const projects: Project[] = [
@@ -419,6 +421,60 @@ export const projects: Project[] = [
       limits: 'A coursework study of established numerical methods, not a novel quadrature technique.',
     },
     links: {},
+  },
+  {
+    slug: 'keys',
+    title: 'Keys — Key Signature Finder',
+    category: 'music',
+    summary: 'Find the key signature of any major or minor tonality: number of accidentals and which notes are sharp or flat.',
+    stack: ['JavaScript', 'Music Theory'],
+    status: 'live-demo',
+    featured: false,
+    metrics: [{ label: 'Type', value: 'Web tool' }],
+    body: {
+      problem: 'Working out a key signature from memory or by ear is slow when you just need the answer while practicing or writing.',
+      approach: 'A direct lookup: pick a tonic and mode, get the accidentals and which notes are sharp or flat, instantly.',
+      architecture: 'Single-page vanilla JavaScript — a note grid driving a circle-of-fifths lookup, no backend.',
+      results: 'A fast reference used during practice and writing, alongside Mode Finder.',
+      limits: 'Covers standard major/minor keys; doesn’t extend to non-diatonic or exotic scales.',
+    },
+    links: { demo: '/keys/' },
+  },
+  {
+    slug: 'mode-finder',
+    title: 'Mode Finder — Modal Scale Finder',
+    category: 'music',
+    summary: 'Look up the modes of any key and see how each one shifts the color of the same set of notes.',
+    stack: ['JavaScript', 'Music Theory'],
+    status: 'live-demo',
+    featured: false,
+    metrics: [{ label: 'Type', value: 'Web tool' }],
+    body: {
+      problem: 'Modes share the same notes as their parent major scale, which makes their distinct character easy to lose track of without a reference.',
+      approach: 'Pick a root and see all seven modes built from it at a glance, color-coded by major/minor/diminished quality.',
+      architecture: 'Vanilla JavaScript, the same lightweight single-page pattern as Keys.',
+      results: 'A quick modal reference used alongside Keys during practice and composition.',
+      limits: 'Covers the seven diatonic modes; no harmonic/melodic minor modes or non-Western scales.',
+    },
+    links: { demo: '/mode-finder/' },
+  },
+  {
+    slug: 'passwords',
+    title: 'Passwords — Password Generator',
+    category: 'security',
+    summary: 'Password generator with a cyberpunk terminal look — adjustable length and character types, real-time strength meter.',
+    stack: ['JavaScript', 'HTML / CSS'],
+    status: 'live-demo',
+    featured: false,
+    metrics: [{ label: 'Type', value: 'Web tool' }],
+    body: {
+      problem: 'Generating a genuinely varied, strong password by hand is unreliable, and most generators feel like an afterthought bolted onto a form.',
+      approach: 'A generator with adjustable length and character-set options and a live strength meter, wrapped in a scanline cyberpunk-terminal look.',
+      architecture: 'Self-contained vanilla JavaScript single page.',
+      results: 'A tool actually used to generate passwords, not just a demo of the aesthetic.',
+      limits: 'Randomness comes from Math.random(), not the Web Crypto API — fine for casual use, not for anything requiring cryptographically secure randomness.',
+    },
+    links: { demo: '/passwords/' },
   },
 ];
 

@@ -64,6 +64,14 @@ export function CategoryMotif({ category, className }: { category: ProjectCatego
           <path d="M8 9 H18 M8 12.5 H14" {...common} strokeWidth={0.6} />
         </svg>
       );
+    case 'music':
+      return (
+        <svg viewBox="0 0 26 26" className={className}>
+          <circle cx="7" cy="20" r="2.6" {...common} />
+          <circle cx="18" cy="17" r="2.6" {...common} />
+          <path d="M9.6 20 V6 L20.6 4 V17" {...common} strokeWidth={0.7} />
+        </svg>
+      );
     default:
       return null;
   }

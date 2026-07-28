@@ -7,7 +7,6 @@ import { withTransitionClick } from '../lib/viewTransition';
 const links = [
   { to: '/', label: 'Home' },
   { to: '/projects', label: 'Projects' },
-  { to: '/music-tools', label: 'Music Tools' },
   { to: '/contact', label: 'Contact' },
 ];
 

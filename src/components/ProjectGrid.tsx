@@ -12,6 +12,7 @@ const CATEGORY_ORDER: ProjectCategory[] = [
   'ml',
   'nlp',
   'audio',
+  'music',
   'astrophysics',
   'systems',
   'data',
