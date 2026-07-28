@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectGrid } from '../components/ProjectGrid';
-import { HeroScene } from '../components/HeroScene';
+import { HeroVideo } from '../components/HeroVideo';
 import { Reveal } from '../components/Reveal';
 import { withTransitionClick } from '../lib/viewTransition';
 import { featuredProjects, otherProjects } from '../data/projects';
@@ -35,7 +35,7 @@ export function Home() {
     <>
       {/* ============ HERO ============ */}
       <section className="relative w-full overflow-hidden bg-background" style={{ height: '100dvh' }}>
-        <HeroScene />
+        <HeroVideo />
         <div
           className="absolute inset-0"
           style={{
