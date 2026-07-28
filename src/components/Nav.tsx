@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { withTransitionClick } from '../lib/viewTransition';
 
 const links = [
   { to: '/', label: 'Home' },
@@ -14,6 +15,7 @@ export const NAV_HEIGHT = 'pt-24 sm:pt-28';
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed top-0 inset-x-0 z-[100]">
@@ -22,7 +24,10 @@ export function Nav() {
           to="/"
           className="text-2xl sm:text-3xl tracking-tight text-foreground"
           style={{ fontFamily: "'Instrument Serif', serif" }}
-          onClick={() => setOpen(false)}
+          onClick={(e) => {
+            setOpen(false);
+            withTransitionClick(navigate, '/')(e);
+          }}
         >
           Flavia Gaglio<sup className="text-xs align-super">.</sup>
         </NavLink>
@@ -33,6 +38,7 @@ export function Nav() {
               key={l.to}
               to={l.to}
               end={l.to === '/'}
+              onClick={withTransitionClick(navigate, l.to)}
               className={({ isActive }) =>
                 cn(
                   'px-4 py-1.5 rounded-full text-sm font-medium transition-colors',
@@ -55,12 +61,13 @@ export function Nav() {
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
 
-        <a
-          href="/contact"
+        <NavLink
+          to="/contact"
+          onClick={withTransitionClick(navigate, '/contact')}
           className="hidden md:inline-flex liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground hover:scale-[1.03] transition-transform"
         >
           Get in touch
-        </a>
+        </NavLink>
       </div>
 
       {open && (
@@ -73,7 +80,10 @@ export function Nav() {
               key={l.to}
               to={l.to}
               end={l.to === '/'}
-              onClick={() => setOpen(false)}
+              onClick={(e) => {
+                setOpen(false);
+                withTransitionClick(navigate, l.to)(e);
+              }}
               className={({ isActive }) =>
                 cn(
                   'px-5 py-3.5 rounded-2xl text-base font-medium min-h-11',

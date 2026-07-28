@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import { GithubIcon as Github } from './icons/BrandIcons';
 import type { Project } from '../data/projects';
 import { categoryLabels } from '../data/projects';
 import { CategoryMotif } from './CategoryMotif';
 import { StatusBadge } from './StatusBadge';
+import { withTransitionClick } from '../lib/viewTransition';
 
 export function ProjectCard({ project }: { project: Project }) {
+  const navigate = useNavigate();
+  const to = `/projects/${project.slug}`;
   return (
     <article className="liquid-glass rounded-3xl overflow-hidden bg-white/[0.02] flex flex-col">
       <div className="relative aspect-[16/9] flex items-center justify-center bg-secondary/60 border-b border-border">
@@ -44,7 +47,7 @@ export function ProjectCard({ project }: { project: Project }) {
               <Github size={14} /> Code
             </a>
           )}
-          <Link to={`/projects/${project.slug}`} className="inline-flex items-center gap-1.5 text-foreground hover:text-signal min-h-11">
+          <Link to={to} onClick={withTransitionClick(navigate, to)} className="inline-flex items-center gap-1.5 text-foreground hover:text-signal min-h-11">
             Case study <ArrowRight size={14} />
           </Link>
         </div>

@@ -1,10 +1,11 @@
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link, Navigate, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { GithubIcon as Github } from '../components/icons/BrandIcons';
 import { NAV_HEIGHT } from '../components/Nav';
 import { CategoryMotif } from '../components/CategoryMotif';
 import { StatusBadge } from '../components/StatusBadge';
 import { getProjectBySlug, categoryLabels } from '../data/projects';
+import { withTransitionClick } from '../lib/viewTransition';
 
 const sections: { key: 'problem' | 'approach' | 'architecture' | 'results' | 'limits'; label: string }[] = [
   { key: 'problem', label: 'Problem' },
@@ -16,6 +17,7 @@ const sections: { key: 'problem' | 'approach' | 'architecture' | 'results' | 'li
 
 export function ProjectDetail() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const project = getProjectBySlug(slug ?? '');
 
   if (!project) return <Navigate to="/projects" replace />;
@@ -23,7 +25,11 @@ export function ProjectDetail() {
   return (
     <div className={NAV_HEIGHT}>
       <article className="max-w-3xl mx-auto px-5 sm:px-8 pt-6 pb-24 sm:pb-32">
-        <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-8 min-h-11">
+        <Link
+          to="/projects"
+          onClick={withTransitionClick(navigate, '/projects')}
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-8 min-h-11"
+        >
           <ArrowLeft size={14} /> All projects
         </Link>
 

@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectGrid } from '../components/ProjectGrid';
 import { HeroScene } from '../components/HeroScene';
+import { Reveal } from '../components/Reveal';
+import { withTransitionClick } from '../lib/viewTransition';
 import { featuredProjects, otherProjects } from '../data/projects';
 
 const skillGroups = [
@@ -27,6 +29,8 @@ const education = [
 ];
 
 export function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* ============ HERO ============ */}
@@ -62,17 +66,17 @@ export function Home() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center mt-12 animate-fade-rise-delay-2">
             <Button variant="glass" size="lg" asChild>
-              <Link to="/projects">View my work</Link>
+              <Link to="/projects" onClick={withTransitionClick(navigate, '/projects')}>View my work</Link>
             </Button>
             <Button variant="ghost" size="lg" asChild>
-              <Link to="/contact">Get in touch</Link>
+              <Link to="/contact" onClick={withTransitionClick(navigate, '/contact')}>Get in touch</Link>
             </Button>
           </div>
         </div>
       </section>
 
       {/* ============ ABOUT ============ */}
-      <section className="max-w-5xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+      <Reveal as="section" className="max-w-5xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
         <p className="font-mono text-xs uppercase tracking-widest text-signal mb-4">About</p>
         <h2 className="text-3xl sm:text-4xl mb-10 max-w-2xl italic" style={{ fontFamily: "'Instrument Serif', serif" }}>
           Structure, improvisation and attention to detail.
@@ -111,10 +115,10 @@ export function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ============ SKILLS ============ */}
-      <section className="max-w-5xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
+      <Reveal as="section" className="max-w-5xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
         <p className="font-mono text-xs uppercase tracking-widest text-signal mb-4">Skills</p>
         <h2 className="text-3xl sm:text-4xl mb-10 italic" style={{ fontFamily: "'Instrument Serif', serif" }}>
           Tools I reach for.
@@ -133,10 +137,10 @@ export function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* ============ FEATURED PROJECTS ============ */}
-      <section className="max-w-6xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
+      <Reveal as="section" className="max-w-6xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
         <div className="flex items-end justify-between gap-4 mb-10 flex-wrap">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-signal mb-4">Featured</p>
@@ -144,7 +148,11 @@ export function Home() {
               Selected work.
             </h2>
           </div>
-          <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-signal min-h-11">
+          <Link
+            to="/projects"
+            onClick={withTransitionClick(navigate, '/projects')}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-signal min-h-11"
+          >
             All projects <ArrowRight size={14} />
           </Link>
         </div>
@@ -153,18 +161,18 @@ export function Home() {
             <ProjectCard key={p.slug} project={p} />
           ))}
         </div>
-      </section>
+      </Reveal>
 
-      {/* ============ MORE PROJECTS (compact grid) ============ */}
-      <section className="max-w-6xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
-        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-6">
-          More work — {otherProjects.length} more projects
+      {/* ============ MORE PROJECTS (grouped by category) ============ */}
+      <Reveal as="section" className="max-w-6xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-8">
+          More work — {otherProjects.length} more projects, grouped by category
         </p>
-        <ProjectGrid items={otherProjects} />
-      </section>
+        <ProjectGrid items={otherProjects} groupByCategory />
+      </Reveal>
 
       {/* ============ EDUCATION ============ */}
-      <section className="max-w-5xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
+      <Reveal as="section" className="max-w-5xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
         <p className="font-mono text-xs uppercase tracking-widest text-signal mb-4">Education</p>
         <h2 className="text-3xl sm:text-4xl mb-10 italic" style={{ fontFamily: "'Instrument Serif', serif" }}>
           A short, real timeline.
@@ -181,17 +189,17 @@ export function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* ============ CONTACT TEASER ============ */}
-      <section className="max-w-5xl mx-auto px-5 sm:px-8 pb-28 sm:pb-36 text-center">
+      <Reveal as="section" className="max-w-5xl mx-auto px-5 sm:px-8 pb-28 sm:pb-36 text-center">
         <h2 className="text-3xl sm:text-4xl italic mb-6" style={{ fontFamily: "'Instrument Serif', serif" }}>
           Let's talk.
         </h2>
         <Button variant="primary" size="lg" asChild>
-          <Link to="/contact">Get in touch</Link>
+          <Link to="/contact" onClick={withTransitionClick(navigate, '/contact')}>Get in touch</Link>
         </Button>
-      </section>
+      </Reveal>
     </>
   );
 }
