@@ -1,0 +1,91 @@
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { cn } from '../lib/utils';
+
+const links = [
+  { to: '/', label: 'Home' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/music-tools', label: 'Music Tools' },
+  { to: '/contact', label: 'Contact' },
+];
+
+export const NAV_HEIGHT = 'pt-24 sm:pt-28';
+
+export function Nav() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <nav className="fixed top-0 inset-x-0 z-[100]">
+      <div className="relative flex items-center justify-between px-5 py-5 sm:px-8 sm:py-6 max-w-7xl mx-auto">
+        <NavLink
+          to="/"
+          className="text-2xl sm:text-3xl tracking-tight text-foreground"
+          style={{ fontFamily: "'Instrument Serif', serif" }}
+          onClick={() => setOpen(false)}
+        >
+          Flavia Gaglio<sup className="text-xs align-super">.</sup>
+        </NavLink>
+
+        <div className="hidden md:flex liquid-glass rounded-full px-2 py-2 items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          {links.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.to === '/'}
+              className={({ isActive }) =>
+                cn(
+                  'px-4 py-1.5 rounded-full text-sm font-medium transition-colors',
+                  isActive ? 'text-foreground bg-white/10' : 'text-muted-foreground hover:bg-white/10 hover:text-foreground',
+                )
+              }
+            >
+              {l.label}
+            </NavLink>
+          ))}
+        </div>
+
+        <button
+          className="md:hidden liquid-glass rounded-full p-2.5 text-foreground min-h-11 min-w-11 flex items-center justify-center"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((o) => !o)}
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+
+        <a
+          href="/contact"
+          className="hidden md:inline-flex liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground hover:scale-[1.03] transition-transform"
+        >
+          Get in touch
+        </a>
+      </div>
+
+      {open && (
+        <div
+          id="mobile-nav"
+          className="md:hidden fixed inset-x-4 top-20 z-[100] liquid-glass rounded-3xl bg-background/95 p-2 flex flex-col gap-1"
+        >
+          {links.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.to === '/'}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                cn(
+                  'px-5 py-3.5 rounded-2xl text-base font-medium min-h-11',
+                  isActive ? 'text-foreground bg-white/10' : 'text-muted-foreground',
+                )
+              }
+            >
+              {l.label}
+            </NavLink>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
+}
