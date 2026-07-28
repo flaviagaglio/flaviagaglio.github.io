@@ -68,55 +68,59 @@ export function HeroScene() {
 
       <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#sky)" />
 
-      {STARS.map((s) => (
-        <circle
-          key={s.id}
-          cx={s.x}
-          cy={s.y}
-          r={s.r}
-          fill="#ffffff"
-          className="hero-star"
-          style={{ animationDelay: `${s.delay}s`, animationDuration: `${s.duration}s` }}
-        />
-      ))}
+      {/* whole scene breathes very slowly, so the hero reads as alive even
+          before anyone notices the individual star/flower/glow animations */}
+      <g className="hero-sky-drift">
+        {STARS.map((s) => (
+          <circle
+            key={s.id}
+            cx={s.x}
+            cy={s.y}
+            r={s.r}
+            fill="#ffffff"
+            className="hero-star"
+            style={{ animationDelay: `${s.delay}s`, animationDuration: `${s.duration}s` }}
+          />
+        ))}
 
-      {/* screen glow, behind the silhouette */}
-      <ellipse cx={VB_W / 2} cy="800" rx="130" ry="105" fill="url(#glow)" className="hero-screen-glow" />
+        {/* screen glow, behind the silhouette */}
+        <ellipse cx={VB_W / 2} cy="800" rx="130" ry="105" fill="url(#glow)" className="hero-screen-glow" />
 
-      {/* desk */}
-      <rect x={VB_W / 2 - 110} y="858" width="220" height="6" fill="#0a0d12" opacity="0.6" />
+        {/* desk */}
+        <rect x={VB_W / 2 - 110} y="858" width="220" height="6" fill="#0a0d12" opacity="0.6" />
 
-      {/* silhouette, seen from behind, at a laptop — a generic figure, not a likeness */}
-      <g fill="#050708">
-        {/* afro */}
-        <circle cx={VB_W / 2} cy="762" r="52" />
-        <circle cx={VB_W / 2 - 38} cy="774" r="40" />
-        <circle cx={VB_W / 2 + 38} cy="774" r="40" />
-        <circle cx={VB_W / 2} cy="722" r="38" />
-        {/* shoulders + back */}
-        <path
-          d={`M${VB_W / 2 - 62} 862 C${VB_W / 2 - 62} 826 ${VB_W / 2 - 32} 806 ${VB_W / 2} 806
-              C${VB_W / 2 + 32} 806 ${VB_W / 2 + 62} 826 ${VB_W / 2 + 62} 862 Z`}
-        />
-        {/* arms toward the laptop */}
-        <path
-          d={`M${VB_W / 2 - 62} 862 C${VB_W / 2 - 68} 842 ${VB_W / 2 - 58} 828 ${VB_W / 2 - 40} 822
-              L${VB_W / 2 - 28} 852 Z`}
-        />
-        <path
-          d={`M${VB_W / 2 + 62} 862 C${VB_W / 2 + 68} 842 ${VB_W / 2 + 58} 828 ${VB_W / 2 + 40} 822
-              L${VB_W / 2 + 28} 852 Z`}
-        />
+        {/* silhouette, seen from behind, at a laptop — a generic figure, not a likeness */}
+        <g fill="#050708">
+          {/* afro */}
+          <circle cx={VB_W / 2} cy="762" r="52" />
+          <circle cx={VB_W / 2 - 38} cy="774" r="40" />
+          <circle cx={VB_W / 2 + 38} cy="774" r="40" />
+          <circle cx={VB_W / 2} cy="722" r="38" />
+          {/* shoulders + back */}
+          <path
+            d={`M${VB_W / 2 - 62} 862 C${VB_W / 2 - 62} 826 ${VB_W / 2 - 32} 806 ${VB_W / 2} 806
+                C${VB_W / 2 + 32} 806 ${VB_W / 2 + 62} 826 ${VB_W / 2 + 62} 862 Z`}
+          />
+          {/* arms toward the laptop */}
+          <path
+            d={`M${VB_W / 2 - 62} 862 C${VB_W / 2 - 68} 842 ${VB_W / 2 - 58} 828 ${VB_W / 2 - 40} 822
+                L${VB_W / 2 - 28} 852 Z`}
+          />
+          <path
+            d={`M${VB_W / 2 + 62} 862 C${VB_W / 2 + 68} 842 ${VB_W / 2 + 58} 828 ${VB_W / 2 + 40} 822
+                L${VB_W / 2 + 28} 852 Z`}
+          />
+        </g>
+
+        {/* laptop */}
+        <rect x={VB_W / 2 - 66} y="850" width="132" height="8" rx="3" fill="#050708" />
+        <rect x={VB_W / 2 - 58} y="782" width="116" height="70" rx="4" fill="#050708" />
+        <rect x={VB_W / 2 - 52} y="788" width="104" height="58" rx="2" fill="hsl(var(--signal))" className="hero-screen-flicker" />
+
+        {FLOWERS.map((f) => (
+          <Flower key={f.id} {...f} />
+        ))}
       </g>
-
-      {/* laptop */}
-      <rect x={VB_W / 2 - 66} y="850" width="132" height="8" rx="3" fill="#050708" />
-      <rect x={VB_W / 2 - 58} y="782" width="116" height="70" rx="4" fill="#050708" />
-      <rect x={VB_W / 2 - 52} y="788" width="104" height="58" rx="2" fill="hsl(var(--signal))" className="hero-screen-flicker" />
-
-      {FLOWERS.map((f) => (
-        <Flower key={f.id} {...f} />
-      ))}
     </svg>
   );
 }
