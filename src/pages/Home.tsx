@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectGrid } from '../components/ProjectGrid';
+import { HeroScene } from '../components/HeroScene';
 import { featuredProjects, otherProjects } from '../data/projects';
 
 const skillGroups = [
@@ -30,15 +31,14 @@ export function Home() {
     <>
       {/* ============ HERO ============ */}
       <section className="relative w-full overflow-hidden bg-background" style={{ height: '100dvh' }}>
+        <HeroScene />
         <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+          className="absolute inset-0"
           style={{
-            backgroundColor: '#00263b',
             backgroundImage:
-              "linear-gradient(180deg, rgba(0,20,32,0.35) 0%, rgba(0,20,32,0.25) 45%, rgba(0,20,32,0.85) 100%), url('/images/hero-desk.jpg')",
+              'linear-gradient(180deg, rgba(2,8,23,0.15) 0%, rgba(2,8,23,0.1) 45%, rgba(2,8,23,0.8) 100%)',
           }}
-          role="img"
-          aria-label="Flavia working at her desk, seen from behind"
+          aria-hidden="true"
         />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
