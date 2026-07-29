@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Keys · Flavia Gaglio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #141310;
+            --cream: #efe6d3;
+            --panel: #f7f1e3;
+            --orange: #ff4d1c;
+            --blue: #1c3fff;
+        }
         body {
-            background: #f8fafc;
-            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            font-family: 'Space Grotesk', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -19,65 +26,78 @@
         .container {
             max-width: 1200px;
             width: 100%;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 1.75rem;
-            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px rgba(15, 23, 42, 0.06);
-            border: 1px solid #e2e8f0;
+            background:
+                radial-gradient(circle 3px at 18px 18px, var(--ink) 100%, transparent 101%),
+                radial-gradient(circle 3px at calc(100% - 18px) 18px, var(--ink) 100%, transparent 101%),
+                radial-gradient(circle 3px at 18px calc(100% - 18px), var(--ink) 100%, transparent 101%),
+                radial-gradient(circle 3px at calc(100% - 18px) calc(100% - 18px), var(--ink) 100%, transparent 101%),
+                var(--panel);
+            border: 3px solid var(--ink);
+            border-radius: 4px;
+            padding: 2rem 1.5rem;
         }
         @media (min-width: 768px) {
             .container {
                 padding: 3rem;
-                border-radius: 20px;
+                border-width: 4px;
             }
         }
         h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #0f172a;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--ink);
             text-align: center;
-            letter-spacing: -0.01em;
-            margin-bottom: 0.35rem;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
         }
         @media (min-width: 768px) {
-            h1 { font-size: 2rem; }
+            h1 { font-size: 3rem; }
         }
         .byline {
             text-align: center;
-            font-size: 0.9rem;
-            color: #94a3b8;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ink);
+            opacity: 0.55;
             display: table;
-            margin: 0 auto 1.75rem;
+            margin: 0 auto 2rem;
             width: auto;
         }
         @media (min-width: 768px) {
-            .byline { font-size: 0.95rem; margin-bottom: 2.5rem; }
+            .byline { font-size: 0.8rem; margin-bottom: 2.5rem; }
         }
         .selector-area {
-            background: #f8fafc;
-            border-radius: 14px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid #e2e8f0;
+            background: var(--cream);
+            border: 2px solid var(--ink);
+            border-radius: 4px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
         }
         @media (min-width: 768px) {
             .selector-area {
                 padding: 2rem;
-                border-radius: 16px;
             }
         }
         .selector-label {
             text-align: center;
-            color: #64748b;
-            font-size: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            color: var(--ink);
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 0.15em;
             margin-bottom: 1.25rem;
             font-weight: 700;
         }
+        .selector-label::before {
+            content: '01 / ';
+            opacity: 0.5;
+        }
         @media (min-width: 768px) {
             .selector-label {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
                 margin-bottom: 1.5rem;
             }
         }
@@ -86,85 +106,114 @@
             flex-wrap: wrap;
             gap: 0.5rem;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
+            counter-reset: note;
         }
         .note-btn {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            color: #334155;
-            padding: 0.55rem 0.85rem;
-            border-radius: 8px;
-            font-weight: 600;
+            counter-increment: note;
+            position: relative;
+            background: var(--panel);
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            color: var(--ink);
+            padding: 0.6rem 0.85rem 0.5rem;
+            font-weight: 700;
             font-size: 0.9rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.12s ease;
-            min-width: 70px;
+            transition: all 0.08s ease;
+            min-width: 72px;
             flex: 0 1 auto;
+        }
+        .note-btn::before {
+            content: counter(note, decimal-leading-zero);
+            position: absolute;
+            top: 3px;
+            left: 5px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.55rem;
+            font-weight: 400;
+            opacity: 0.4;
         }
         @media (min-width: 480px) {
             .note-btn {
-                padding: 0.7rem 1.1rem;
+                padding: 0.75rem 1.1rem 0.6rem;
                 font-size: 0.95rem;
-                min-width: 80px;
+                min-width: 82px;
             }
         }
         @media (min-width: 768px) {
             .note-btn {
-                padding: 0.8rem 1.3rem;
-                font-size: 1rem;
-                min-width: 88px;
+                padding: 0.85rem 1.3rem 0.7rem;
+                font-size: 1.05rem;
+                min-width: 90px;
             }
         }
         .note-btn:hover {
-            border-color: #4f46e5;
-            color: #4f46e5;
+            background: #ffffff;
         }
         .note-btn:active {
-            transform: scale(0.97);
+            transform: translateY(2px);
         }
         .note-btn.selected {
-            background: #4f46e5;
-            border-color: #4f46e5;
-            color: #ffffff;
+            background: var(--orange);
+            border-color: var(--ink);
+            color: var(--ink);
         }
-        .note-btn.selected:hover {
-            color: #ffffff;
+        .note-btn.selected::before {
+            opacity: 0.55;
         }
         .calculate-btn {
-            background: #4f46e5;
-            color: #ffffff;
-            border: none;
-            padding: 0.9rem 2rem;
-            border-radius: 10px;
+            background: var(--ink);
+            color: var(--cream);
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            padding: 0.95rem 2rem;
             font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.01em;
+            font-size: 0.85rem;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             cursor: pointer;
             width: 100%;
             max-width: 320px;
-            margin: 0.5rem auto 0;
+            margin: 0.25rem auto 0;
             display: block;
-            transition: background 0.12s ease;
+            transition: all 0.08s ease;
         }
         @media (min-width: 768px) {
             .calculate-btn {
-                padding: 1rem 3rem;
-                font-size: 1.05rem;
+                padding: 1.05rem 3rem;
+                font-size: 0.9rem;
                 max-width: 360px;
             }
         }
         .calculate-btn:hover {
-            background: #4338ca;
+            background: var(--orange);
+            color: var(--ink);
         }
         .calculate-btn:active {
-            transform: scale(0.98);
+            transform: translateY(2px);
+        }
+        .results-label {
+            font-family: 'Space Mono', monospace;
+            color: var(--ink);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .results-label::before {
+            content: '02 / ';
+            opacity: 0.5;
         }
         .results-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1rem;
-            margin-top: 2rem;
         }
         @media (min-width: 600px) {
             .results-grid {
@@ -177,54 +226,56 @@
             }
         }
         .result-card {
-            background: #ffffff;
-            border-radius: 12px;
+            background: var(--panel);
+            border: 2px solid var(--ink);
+            border-radius: 3px;
             padding: 1.5rem;
-            border: 1px solid #e2e8f0;
             text-align: center;
-            transition: border-color 0.12s ease;
-        }
-        .result-card:hover {
-            border-color: #c7d2fe;
         }
         .key-name {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 0.25rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ink);
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
         }
         @media (min-width: 768px) {
-            .key-name { font-size: 1.6rem; }
+            .key-name { font-size: 1.75rem; }
         }
         .relative-minor {
-            font-size: 0.9rem;
-            color: #94a3b8;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--ink);
+            opacity: 0.55;
             margin-bottom: 1.1rem;
         }
         .accidentals-count {
-            font-size: 0.8rem;
-            color: #64748b;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--ink);
             margin-bottom: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.1em;
         }
         .accidentals-list {
             font-size: 1.2rem;
             font-weight: 700;
-            background: #f8fafc;
+            background: var(--cream);
             padding: 0.65rem 1rem;
-            border-radius: 10px;
+            border-radius: 3px;
             display: inline-block;
-            border: 1px solid #e2e8f0;
+            border: 2px solid var(--ink);
         }
         .accidental-note {
             display: inline-block;
             margin: 0 0.22rem;
             font-weight: 700;
         }
-        .sharp { color: #4f46e5; }
-        .flat { color: #0d9488; }
+        .sharp { color: var(--orange); }
+        .flat { color: var(--blue); }
     </style>
 </head>
 <body>
@@ -238,6 +289,7 @@
             <button class="calculate-btn" id="calculate">Scopri l'armatura</button>
         </div>
 
+        <div class="results-label">armatura</div>
         <div id="resultsContainer" class="results-grid"></div>
     </div>
 
