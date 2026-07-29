@@ -6,7 +6,7 @@ import { StatusBadge } from './StatusBadge';
 import { withTransitionClick } from '../lib/viewTransition';
 import { Reveal } from './Reveal';
 
-const CATEGORY_ORDER: ProjectCategory[] = [
+export const CATEGORY_ORDER: ProjectCategory[] = [
   'biometrics',
   'security',
   'ml',
@@ -25,7 +25,7 @@ function GridBox({ p }: { p: Project }) {
     <Link
       to={to}
       onClick={withTransitionClick(navigate, to)}
-      className="group relative bg-background hover:bg-secondary/60 transition-colors p-5 flex flex-col gap-3 min-h-[160px] border-r border-b border-border"
+      className="group liquid-glass relative rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors p-5 flex flex-col gap-3 min-h-[160px]"
     >
       <CategoryMotif category={p.category} className="absolute top-4 right-4 w-6 h-6 text-signal/40 transition-transform duration-300 group-hover:text-signal/70 group-hover:-rotate-6 group-hover:scale-110" />
       <span className="font-mono text-[0.62rem] uppercase tracking-wide text-signal">{categoryLabels[p.category]}</span>
@@ -40,7 +40,7 @@ function GridBox({ p }: { p: Project }) {
 export function ProjectGrid({ items, groupByCategory = false }: { items: Project[]; groupByCategory?: boolean }) {
   if (!groupByCategory) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-2xl overflow-hidden border-t border-l border-border">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((p) => (
           <GridBox key={p.slug} p={p} />
         ))}
@@ -55,14 +55,14 @@ export function ProjectGrid({ items, groupByCategory = false }: { items: Project
   return (
     <div className="space-y-10">
       {groups.map((g) => (
-        <Reveal key={g.cat}>
+        <Reveal key={g.cat} id={`category-${g.cat}`}>
           <div className="flex items-center gap-3 mb-3">
             <CategoryMotif category={g.cat} className="w-4 h-4 text-signal" />
             <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
               {categoryLabels[g.cat]} <span className="text-signal/70">— {g.items.length}</span>
             </h3>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-2xl overflow-hidden border-t border-l border-border">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {g.items.map((p) => (
               <GridBox key={p.slug} p={p} />
             ))}

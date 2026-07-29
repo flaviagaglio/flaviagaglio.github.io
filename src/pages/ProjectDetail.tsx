@@ -67,6 +67,17 @@ export function ProjectDetail() {
           </div>
         )}
 
+        {project.status === 'academic-private' && (
+          <div className="liquid-glass rounded-2xl bg-white/[0.02] p-5 mb-12 text-sm text-foreground/90 leading-relaxed">
+            The code for this project isn't public — it's academic work, and publishing it isn't always appropriate.
+            Depending on the specific project, I may be able to share it privately on request:{' '}
+            <Link to="/contact" className="text-signal font-medium hover:text-signal/80">
+              get in touch
+            </Link>
+            .
+          </div>
+        )}
+
         {project.metrics.length > 0 && (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-12 pb-10 border-b border-border">
             {project.metrics.map((m) => (

@@ -6,10 +6,12 @@ export function Reveal({
   children,
   className,
   as = 'div',
+  id,
 }: {
   children: ReactNode;
   className?: string;
   as?: 'div' | 'section';
+  id?: string;
 }) {
   const { ref, inView } = useInView<HTMLElement>();
   const cls = cn(
@@ -20,13 +22,13 @@ export function Reveal({
 
   if (as === 'section') {
     return (
-      <section ref={ref} className={cls}>
+      <section ref={ref} id={id} className={cls}>
         {children}
       </section>
     );
   }
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className={cls}>
+    <div ref={ref as React.RefObject<HTMLDivElement>} id={id} className={cls}>
       {children}
     </div>
   );

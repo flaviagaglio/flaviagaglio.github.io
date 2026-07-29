@@ -40,37 +40,39 @@ export function Home() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              'linear-gradient(180deg, rgba(2,8,23,0.15) 0%, rgba(2,8,23,0.1) 45%, rgba(2,8,23,0.8) 100%)',
+              'linear-gradient(180deg, rgba(2,8,23,0.45) 0%, rgba(2,8,23,0.3) 35%, rgba(2,8,23,0.4) 55%, rgba(2,8,23,0.88) 100%)',
           }}
           aria-hidden="true"
         />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-          <p className="font-mono text-xs tracking-[0.16em] uppercase text-white/70 mb-6 animate-fade-rise">
-            Portfolio — 2026 · <span className="text-signal">AI &amp; Cybersecurity Student</span>
-          </p>
-          <h1
-            className="text-white leading-[0.95] text-5xl sm:text-7xl md:text-8xl animate-fade-rise"
-            style={{ fontFamily: "'Instrument Serif', serif" }}
-          >
-            <span className="block italic font-normal" style={{ letterSpacing: '-0.05em' }}>
-              Where signals
-            </span>
-            <span className="block font-normal -mt-1" style={{ letterSpacing: '-0.08em' }}>
-              reveal the truth.
-            </span>
-          </h1>
-          <p className="text-white/80 text-base sm:text-lg max-w-2xl mt-8 leading-relaxed animate-fade-rise-delay">
-            Computer Engineering graduate with a growing focus on machine learning and biometric systems — and on the
-            ways these systems can be broken. Currently pursuing a Master's in AI &amp; Cybersecurity.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center mt-12 animate-fade-rise-delay-2">
-            <Button variant="glass" size="lg" asChild>
-              <Link to="/projects" onClick={withTransitionClick(navigate, '/projects')}>View my work</Link>
-            </Button>
-            <Button variant="ghost" size="lg" asChild>
-              <Link to="/contact" onClick={withTransitionClick(navigate, '/contact')}>Get in touch</Link>
-            </Button>
+          <div className="liquid-glass rounded-[2rem] bg-black/20 px-6 py-10 sm:px-14 sm:py-14 max-w-3xl">
+            <p className="font-mono text-xs tracking-[0.16em] uppercase text-white/70 mb-6 animate-fade-rise">
+              Portfolio — 2026 · <span className="text-signal">AI &amp; Cybersecurity Student</span>
+            </p>
+            <h1
+              className="text-white leading-[0.95] text-5xl sm:text-7xl md:text-8xl animate-fade-rise"
+              style={{ fontFamily: "'Instrument Serif', serif" }}
+            >
+              <span className="block italic font-normal" style={{ letterSpacing: '-0.05em' }}>
+                Where signals
+              </span>
+              <span className="block font-normal -mt-1" style={{ letterSpacing: '-0.08em' }}>
+                reveal the truth.
+              </span>
+            </h1>
+            <p className="text-white/80 text-base sm:text-lg max-w-2xl mx-auto mt-8 leading-relaxed animate-fade-rise-delay">
+              Computer Engineering graduate with a growing focus on machine learning and biometric systems — and on
+              the ways these systems can be broken. Currently pursuing a Master's in AI &amp; Cybersecurity.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center mt-12 animate-fade-rise-delay-2">
+              <Button variant="glass" size="lg" asChild>
+                <Link to="/projects" onClick={withTransitionClick(navigate, '/projects')}>View my work</Link>
+              </Button>
+              <Button variant="ghost" size="lg" asChild>
+                <Link to="/contact" onClick={withTransitionClick(navigate, '/contact')}>Get in touch</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -194,7 +196,7 @@ export function Home() {
       {/* ============ CONTACT TEASER ============ */}
       <Reveal as="section" className="max-w-5xl mx-auto px-5 sm:px-8 pb-28 sm:pb-36 text-center">
         <h2 className="text-3xl sm:text-4xl italic mb-6" style={{ fontFamily: "'Instrument Serif', serif" }}>
-          Let's talk.
+          Always up for a good conversation.
         </h2>
         <Button variant="primary" size="lg" asChild>
           <Link to="/contact" onClick={withTransitionClick(navigate, '/contact')}>Get in touch</Link>

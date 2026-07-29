@@ -435,7 +435,7 @@ export const projects: Project[] = [
       problem: 'Working out a key signature from memory or by ear is slow when you just need the answer while practicing or writing.',
       approach: 'A direct lookup: pick a tonic and mode, get the accidentals and which notes are sharp or flat, instantly.',
       architecture: 'Single-page vanilla JavaScript — a note grid driving a circle-of-fifths lookup, no backend.',
-      results: 'A fast reference used during practice and writing, alongside Mode Finder.',
+      results: 'A fast reference used during practice and writing.',
       limits: 'Covers standard major/minor keys; doesn’t extend to non-diatonic or exotic scales.',
     },
     links: { demo: '/keys/' },

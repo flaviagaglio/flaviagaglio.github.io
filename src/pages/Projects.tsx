@@ -1,6 +1,7 @@
 import { NAV_HEIGHT } from '../components/Nav';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectGrid } from '../components/ProjectGrid';
+import { CategoryJump } from '../components/CategoryJump';
 import { Reveal } from '../components/Reveal';
 import { featuredProjects, otherProjects, projects } from '../data/projects';
 
@@ -30,9 +31,12 @@ export function Projects() {
       </Reveal>
 
       <Reveal as="section" className="max-w-6xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-8">
-          All other work, grouped by category
-        </h2>
+        <div className="flex items-center justify-between gap-4 flex-wrap mb-8">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            All other work, grouped by category
+          </h2>
+          <CategoryJump items={otherProjects} />
+        </div>
         <ProjectGrid items={otherProjects} groupByCategory />
       </Reveal>
     </div>
