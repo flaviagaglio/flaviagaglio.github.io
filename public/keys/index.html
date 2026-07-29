@@ -60,11 +60,19 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--ink);
-            opacity: 0.55;
+            color: rgba(20, 19, 16, 0.55);
             display: table;
             margin: 0 auto 2rem;
             width: auto;
+        }
+        .byline a {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: currentColor;
+            text-underline-offset: 2px;
+        }
+        .byline a:hover {
+            color: var(--orange);
         }
         @media (min-width: 768px) {
             .byline { font-size: 0.8rem; margin-bottom: 2.5rem; }
@@ -281,7 +289,7 @@
 <body>
     <div class="container">
         <h1>KEYS</h1>
-        <div class="byline">by Flavia Gaglio</div>
+        <div class="byline">by <a href="https://flaviagaglio.github.io" target="_blank" rel="noopener">Flavia Gaglio</a></div>
 
         <div class="selector-area">
             <div class="selector-label">circolo delle quinte</div>
