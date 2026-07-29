@@ -8,7 +8,9 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(145deg, #fae5d7 0%, #f7d9c4 100%);
+            background:
+                radial-gradient(circle at 50% 0%, rgba(224, 185, 115, 0.08) 0%, transparent 55%),
+                linear-gradient(160deg, #14100c 0%, #0a0806 100%);
             font-family: 'Lato', sans-serif;
             min-height: 100vh;
             display: flex;
@@ -19,12 +21,12 @@
         .container {
             max-width: 1300px;
             width: 100%;
-            background: rgba(255, 245, 235, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(24, 19, 15, 0.75);
+            backdrop-filter: blur(14px);
             border-radius: 30px;
             padding: 1.5rem;
-            box-shadow: 0 30px 50px rgba(180, 100, 50, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(212, 168, 90, 0.06);
+            border: 1px solid rgba(212, 175, 122, 0.22);
         }
         @media (min-width: 768px) {
             .container {
@@ -36,9 +38,12 @@
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             font-weight: 900;
-            color: #8b5a2b;
             text-align: center;
-            text-shadow: 2px 2px 0 #f0d5b0;
+            background: linear-gradient(180deg, #f3d9a4 0%, #c99a4e 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 24px rgba(224, 185, 115, 0.25);
             margin-bottom: 0.5rem;
         }
         @media (min-width: 768px) {
@@ -47,25 +52,24 @@
         .byline {
             text-align: center;
             font-size: 1.2rem;
-            color: #b07d44;
+            color: #a68a5f;
             font-style: italic;
-            border-bottom: 2px dotted #c9a77b;
-            display: inline-block;
+            border-bottom: 2px dotted rgba(201, 160, 100, 0.4);
+            display: table;
             padding-bottom: 0.3rem;
             margin: 0 auto 1.5rem;
             width: auto;
-            display: table;
         }
         @media (min-width: 768px) {
             .byline { font-size: 1.3rem; margin-bottom: 2rem; }
         }
         .selector-area {
-            background: rgba(250, 235, 215, 0.9);
+            background: rgba(14, 11, 8, 0.55);
             border-radius: 30px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            border: 2px solid #dbb88c;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.5), 0 10px 20px rgba(140,80,30,0.2);
+            border: 1px solid rgba(201, 160, 100, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 10px 24px rgba(0,0,0,0.35);
         }
         @media (min-width: 768px) {
             .selector-area {
@@ -75,7 +79,7 @@
         }
         .selector-label {
             text-align: center;
-            color: #7a4e2e;
+            color: #c9a877;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -97,16 +101,16 @@
             margin-bottom: 1rem;
         }
         .note-btn {
-            background: #fff7ed;
-            border: 2px solid #c9a077;
-            color: #5e3a1f;
+            background: #1c1611;
+            border: 1px solid rgba(212, 175, 122, 0.35);
+            color: #e2cba3;
             padding: 0.6rem 0.8rem;
             border-radius: 30px;
             font-weight: 700;
             font-size: 0.9rem;
             font-family: 'Playfair Display', serif;
             cursor: pointer;
-            box-shadow: 0 4px 0 #b28b5c;
+            box-shadow: 0 4px 0 #0d0a07;
             transition: all 0.1s ease;
             min-width: 70px;
             flex: 0 1 auto;
@@ -123,27 +127,27 @@
                 padding: 1rem 1.5rem;
                 font-size: 1.2rem;
                 min-width: 90px;
-                box-shadow: 0 6px 0 #b28b5c;
+                box-shadow: 0 6px 0 #0d0a07;
             }
         }
         .note-btn:active {
             transform: translateY(4px);
-            box-shadow: 0 2px 0 #b28b5c;
+            box-shadow: 0 2px 0 #0d0a07;
         }
         .note-btn.selected {
-            background: #e7b183;
-            border-color: #a5662b;
-            color: #2d1e0f;
-            box-shadow: 0 4px 0 #7a4e2e;
+            background: linear-gradient(180deg, #e7c583 0%, #c99a4e 100%);
+            border-color: #f3d9a4;
+            color: #211708;
+            box-shadow: 0 4px 0 #7a5a2e;
         }
         @media (min-width: 768px) {
             .note-btn.selected {
-                box-shadow: 0 6px 0 #7a4e2e;
+                box-shadow: 0 6px 0 #7a5a2e;
             }
         }
         .calculate-btn {
-            background: #c9a077;
-            color: #2d1e0f;
+            background: linear-gradient(180deg, #e7c583 0%, #c99a4e 100%);
+            color: #211708;
             border: none;
             padding: 1rem 2rem;
             border-radius: 40px;
@@ -155,8 +159,8 @@
             margin: 1rem auto 0;
             display: block;
             text-transform: uppercase;
-            box-shadow: 0 8px 0 #7a4e2e;
-            border: 2px solid #ffe7cf;
+            box-shadow: 0 8px 0 #7a5a2e, 0 12px 30px rgba(212, 168, 90, 0.2);
+            border: 1px solid #f3d9a4;
             transition: all 0.1s ease;
         }
         @media (min-width: 768px) {
@@ -164,12 +168,12 @@
                 padding: 1.2rem 3rem;
                 font-size: 1.3rem;
                 max-width: 400px;
-                box-shadow: 0 10px 0 #7a4e2e;
+                box-shadow: 0 10px 0 #7a5a2e, 0 14px 34px rgba(212, 168, 90, 0.22);
             }
         }
         .calculate-btn:active {
             transform: translateY(6px);
-            box-shadow: 0 4px 0 #7a4e2e;
+            box-shadow: 0 4px 0 #7a5a2e;
         }
         .results-grid {
             display: grid;
@@ -188,18 +192,18 @@
             }
         }
         .result-card {
-            background: #fff7ed;
+            background: rgba(20, 16, 12, 0.85);
             border-radius: 25px;
             padding: 1.5rem;
-            border: 2px solid #dbb88c;
-            box-shadow: 0 10px 20px rgba(150,80,30,0.2);
+            border: 1px solid rgba(212, 175, 122, 0.25);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.4);
             text-align: center;
         }
         .key-name {
             font-size: 2rem;
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            color: #5e3a1f;
+            color: #f3d9a4;
             margin-bottom: 0.3rem;
         }
         @media (min-width: 768px) {
@@ -207,38 +211,38 @@
         }
         .relative-minor {
             font-size: 1.1rem;
-            color: #b07d44;
+            color: #a68a5f;
             margin-bottom: 1rem;
             font-style: italic;
         }
         .accidentals-count {
             font-size: 1rem;
-            color: #7a4e2e;
+            color: #c9a877;
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
         .accidentals-list {
             font-size: 1.8rem;
             font-family: 'Playfair Display', serif;
-            background: #fae1c6;
+            background: rgba(10, 8, 6, 0.6);
             padding: 0.8rem;
             border-radius: 40px;
             display: inline-block;
-            border: 2px solid #c9a077;
+            border: 1px solid rgba(212, 175, 122, 0.3);
         }
         .accidental-note {
             display: inline-block;
             margin: 0 0.2rem;
             font-weight: 700;
         }
-        .sharp { color: #bc6c25; }
-        .flat { color: #a47148; }
+        .sharp { color: #e0a84f; }
+        .flat { color: #c97b63; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🎼 KEYS</h1>
-        <div class="byline"><a href="/projects/keys" style="color: inherit; text-decoration: none;">by Flavia Gaglio</a></div>
+        <div class="byline">by Flavia Gaglio</div>
 
         <div class="selector-area">
             <div class="selector-label">circolo delle quinte</div>
@@ -251,23 +255,39 @@
 
     <script>
         (function() {
+            // Ordine di comparsa delle alterazioni nel circolo delle quinte
+            // (i bemolli seguono l'ordine esattamente inverso dei diesis).
+            const SHARP_ORDER = ["Fa", "Do", "Sol", "Re", "La", "Mi", "Si"];
+            const FLAT_ORDER  = ["Si", "Mi", "La", "Re", "Sol", "Do", "Fa"];
+
+            // Ogni tonalità è definita solo da quante alterazioni ha e di che
+            // tipo: le note alterate si calcolano prendendo le prime `count`
+            // note di SHARP_ORDER/FLAT_ORDER, non vanno elencate a mano.
             const MAJOR_SIGNATURES = {
-                "Do":    { count: 0, type: 'none', accidentals: [] },
-                "Do♯":   { count: 7, type: '#', accidentals: ["Fa♯", "Do♯", "Sol♯", "Re♯", "La♯", "Mi♯", "Si♯"] },
-                "Re♭":   { count: 5, type: 'b', accidentals: ["Si♭", "Mi♭", "La♭", "Re♭", "Sol♭"] },
-                "Re":    { count: 2, type: '#', accidentals: ["Fa♯", "Do♯"] },
-                "Mi♭":   { count: 3, type: 'b', accidentals: ["Si♭", "Mi♭", "La♭"] },
-                "Mi":    { count: 4, type: '#', accidentals: ["Fa♯", "Do♯", "Sol♯", "Re♯"] },
-                "Fa":    { count: 1, type: 'b', accidentals: ["Si♭"] },
-                "Fa♯":   { count: 6, type: '#', accidentals: ["Fa♯", "Do♯", "Sol♯", "Re♯", "La♯", "Mi♯"] },
-                "Sol♭":  { count: 6, type: 'b', accidentals: ["Si♭", "Mi♭", "La♭", "Re♭", "Sol♭", "Do♭"] },
-                "Sol":   { count: 1, type: '#', accidentals: ["Fa♯"] },
-                "Sol♯":  { count: 5, type: '#', accidentals: ["Fa♯", "Do♯", "Sol♯", "Re♯", "La♯"] },
-                "La♭":   { count: 4, type: 'b', accidentals: ["Si♭", "Mi♭", "La♭", "Re♭"] },
-                "La":    { count: 3, type: '#', accidentals: ["Fa♯", "Do♯", "Sol♯"] },
-                "Si♭":   { count: 2, type: 'b', accidentals: ["Si♭", "Mi♭"] },
-                "Si":    { count: 5, type: '#', accidentals: ["Fa♯", "Do♯", "Sol♯", "Re♯", "La♯"] }
+                "Do":    { count: 0, type: 'none' },
+                "Do♭":   { count: 7, type: 'b' },
+                "Do♯":   { count: 7, type: '#' },
+                "Re♭":   { count: 5, type: 'b' },
+                "Re":    { count: 2, type: '#' },
+                "Mi♭":   { count: 3, type: 'b' },
+                "Mi":    { count: 4, type: '#' },
+                "Fa":    { count: 1, type: 'b' },
+                "Fa♯":   { count: 6, type: '#' },
+                "Sol♭":  { count: 6, type: 'b' },
+                "Sol":   { count: 1, type: '#' },
+                "Sol♯":  { count: 5, type: '#' },
+                "La♭":   { count: 4, type: 'b' },
+                "La":    { count: 3, type: '#' },
+                "Si♭":   { count: 2, type: 'b' },
+                "Si":    { count: 5, type: '#' }
             };
+
+            function getAccidentals(count, type) {
+                if (type === 'none' || count === 0) return [];
+                const order = type === '#' ? SHARP_ORDER : FLAT_ORDER;
+                const symbol = type === '#' ? '♯' : '♭';
+                return order.slice(0, count).map(nota => nota + symbol);
+            }
 
             const NOTE_LABELS = [
                 "Do", "Sol", "Re", "La", "Mi", "Si/Do♭", "Fa♯/Sol♭", "Re♭/Do♯",
@@ -351,12 +371,10 @@
 
                     const listEl = document.createElement('div');
                     listEl.className = 'accidentals-list';
-                    let html = '';
-                    sig.accidentals.forEach(nota => {
-                        const classe = sig.type === '#' ? 'sharp' : 'flat';
-                        html += `<span class="accidental-note ${classe}">${nota}</span>`;
-                    });
-                    listEl.innerHTML = html;
+                    const classe = sig.type === '#' ? 'sharp' : 'flat';
+                    listEl.innerHTML = getAccidentals(sig.count, sig.type)
+                        .map(nota => `<span class="accidental-note ${classe}">${nota}</span>`)
+                        .join('');
                     card.appendChild(listEl);
                 }
 

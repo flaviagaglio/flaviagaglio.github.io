@@ -433,9 +433,9 @@ export const projects: Project[] = [
     metrics: [{ label: 'Type', value: 'Web tool' }],
     body: {
       problem: 'Working out a key signature from memory or by ear is slow when you just need the answer while practicing or writing.',
-      approach: 'A direct lookup: pick a tonic and mode, get the accidentals and which notes are sharp or flat, instantly.',
-      architecture: 'Single-page vanilla JavaScript — a note grid driving a circle-of-fifths lookup, no backend.',
-      results: 'A fast reference used during practice and writing.',
+      approach: 'Pick a tonic, get the key signature instantly — accidentals are derived algorithmically from the circle-of-fifths sharp/flat order, not hardcoded per key.',
+      architecture: 'Single-page vanilla JavaScript — a note grid feeding a circle-of-fifths calculation, no backend.',
+      results: 'A fast, verified reference (all 15 major keys and relative minors checked against music theory) used during practice and writing.',
       limits: 'Covers standard major/minor keys; doesn’t extend to non-diatonic or exotic scales.',
     },
     links: { demo: '/keys/' },
