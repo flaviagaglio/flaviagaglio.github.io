@@ -18,11 +18,7 @@ export function Nav() {
 
   return (
     <nav className="fixed top-0 inset-x-0 z-[100]">
-      <div
-        className="absolute inset-x-0 top-0 h-24 sm:h-28 pointer-events-none backdrop-blur-md"
-        style={{ backgroundImage: 'linear-gradient(180deg, rgba(2,8,23,0.78) 0%, rgba(2,8,23,0.5) 65%, rgba(2,8,23,0.18) 100%)' }}
-        aria-hidden="true"
-      />
+      <div className="liquid-glass absolute inset-x-0 top-0 h-20 sm:h-24 pointer-events-none" aria-hidden="true" />
       <div className="relative flex items-center justify-between px-5 py-5 sm:px-8 sm:py-6 max-w-7xl mx-auto">
         <NavLink
           to="/"

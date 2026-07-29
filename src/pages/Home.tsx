@@ -46,7 +46,7 @@ export function Home() {
         />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-          <div className="liquid-glass rounded-[2rem] bg-black/20 px-6 py-10 sm:px-14 sm:py-14 max-w-3xl">
+          <div className="liquid-glass rounded-[2rem] px-6 py-10 sm:px-14 sm:py-14 max-w-3xl">
             <p className="font-mono text-xs tracking-[0.16em] uppercase text-white/70 mb-6 animate-fade-rise">
               Portfolio — 2026 · <span className="text-signal">AI &amp; Cybersecurity Student</span>
             </p>
