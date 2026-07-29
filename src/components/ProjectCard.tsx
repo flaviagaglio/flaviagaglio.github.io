@@ -11,7 +11,7 @@ export function ProjectCard({ project }: { project: Project }) {
   const navigate = useNavigate();
   const to = `/projects/${project.slug}`;
   return (
-    <article className="liquid-glass rounded-3xl overflow-hidden bg-white/[0.02] flex flex-col">
+    <article className="liquid-glass rounded-3xl overflow-hidden flex flex-col">
       <div className="relative aspect-[16/9] flex items-center justify-center bg-secondary/60 border-b border-border">
         <CategoryMotif category={project.category} className="w-16 h-16 text-signal/50" />
         <span className="absolute top-3 left-3 font-mono text-[0.65rem] uppercase tracking-wide text-muted-foreground">
@@ -27,11 +27,11 @@ export function ProjectCard({ project }: { project: Project }) {
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed mb-5">{project.summary}</p>
 
-        <div className="flex gap-6 py-4 mb-5 border-t border-b border-border">
+        <div className="grid grid-cols-3 gap-3 py-4 mb-5 border-t border-b border-border">
           {project.metrics.slice(0, 3).map((m) => (
-            <div key={m.label} className="flex flex-col gap-0.5">
-              <span className="font-mono text-[0.6rem] uppercase tracking-wide text-muted-foreground">{m.label}</span>
-              <span className="font-mono text-sm tabular-nums">{m.value}</span>
+            <div key={m.label} className="min-w-0 flex flex-col gap-0.5">
+              <span className="font-mono text-[0.6rem] uppercase tracking-wide text-muted-foreground truncate">{m.label}</span>
+              <span className="font-mono text-sm tabular-nums break-words">{m.value}</span>
             </div>
           ))}
         </div>

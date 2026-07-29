@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         glass: 'liquid-glass text-foreground hover:scale-[1.03]',
         primary: 'bg-primary text-primary-foreground hover:scale-[1.03]',
-        ghost: 'text-muted-foreground hover:text-foreground',
+        ghost: 'liquid-glass text-foreground hover:scale-[1.03]',
       },
       size: {
         default: 'px-6 py-2.5',

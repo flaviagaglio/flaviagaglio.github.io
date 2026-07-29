@@ -1,4 +1,4 @@
-import { LinkedinIcon as Linkedin, GithubIcon as Github, InstagramIcon as Instagram, YoutubeIcon as Youtube } from './icons/BrandIcons';
+import { LinkedinIcon as Linkedin, GithubIcon as Github, InstagramIcon as Instagram } from './icons/BrandIcons';
 
 export function Footer() {
   return (
@@ -14,9 +14,6 @@ export function Footer() {
           </a>
           <a href="https://www.instagram.com/flaviagaglio/" target="_blank" rel="noopener" aria-label="Instagram" className="text-muted-foreground hover:text-foreground transition-colors min-h-11 min-w-11 flex items-center justify-center">
             <Instagram size={18} />
-          </a>
-          <a href="https://www.youtube.com/@ziggystardustzz" target="_blank" rel="noopener" aria-label="YouTube" className="text-muted-foreground hover:text-foreground transition-colors min-h-11 min-w-11 flex items-center justify-center">
-            <Youtube size={18} />
           </a>
         </div>
       </div>
