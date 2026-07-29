@@ -299,7 +299,7 @@ export const projects: Project[] = [
   {
     slug: 'male-infertility-prediction',
     title: 'Male Infertility Prediction',
-    category: 'data',
+    category: 'ml',
     summary: 'Implemented and optimized Decision Trees, MLP and SVM for classifying medical datasets, achieving high accuracy in infertility prediction.',
     stack: ['Python', 'Decision Trees', 'MLP', 'SVM'],
     status: 'academic-private',

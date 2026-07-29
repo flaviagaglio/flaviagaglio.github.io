@@ -18,22 +18,24 @@ export const CATEGORY_ORDER: ProjectCategory[] = [
   'data',
 ];
 
-function GridBox({ p }: { p: Project }) {
+function GridBox({ p, index }: { p: Project; index: number }) {
   const navigate = useNavigate();
   const to = `/projects/${p.slug}`;
   return (
-    <Link
-      to={to}
-      onClick={withTransitionClick(navigate, to)}
-      className="group liquid-glass relative rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors p-5 flex flex-col gap-3 min-h-[160px]"
-    >
-      <CategoryMotif category={p.category} className="absolute top-4 right-4 w-6 h-6 text-signal/40 transition-transform duration-300 group-hover:text-signal/70 group-hover:-rotate-6 group-hover:scale-110" />
-      <span className="font-mono text-[0.62rem] uppercase tracking-wide text-signal">{categoryLabels[p.category]}</span>
-      <h4 className="text-lg leading-snug max-w-[22ch] transition-transform duration-300 group-hover:translate-x-0.5" style={{ fontFamily: "'Instrument Serif', serif" }}>
-        {p.title}
-      </h4>
-      <StatusBadge project={p} className="mt-auto w-fit" />
-    </Link>
+    <Reveal className="rounded-2xl" style={{ transitionDelay: `${(index % 3) * 90}ms` }}>
+      <Link
+        to={to}
+        onClick={withTransitionClick(navigate, to)}
+        className="group liquid-glass relative rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors p-5 flex flex-col gap-3 min-h-[160px]"
+      >
+        <CategoryMotif category={p.category} className="absolute top-4 right-4 w-6 h-6 text-signal/40 transition-transform duration-300 group-hover:text-signal/70 group-hover:-rotate-6 group-hover:scale-110" />
+        <span className="font-mono text-[0.62rem] uppercase tracking-wide text-signal">{categoryLabels[p.category]}</span>
+        <h4 className="text-lg leading-snug max-w-[22ch] transition-transform duration-300 group-hover:translate-x-0.5" style={{ fontFamily: "'Instrument Serif', serif" }}>
+          {p.title}
+        </h4>
+        <StatusBadge project={p} className="mt-auto w-fit" />
+      </Link>
+    </Reveal>
   );
 }
 
@@ -41,8 +43,8 @@ export function ProjectGrid({ items, groupByCategory = false }: { items: Project
   if (!groupByCategory) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((p) => (
-          <GridBox key={p.slug} p={p} />
+        {items.map((p, i) => (
+          <GridBox key={p.slug} p={p} index={i} />
         ))}
       </div>
     );
@@ -55,7 +57,7 @@ export function ProjectGrid({ items, groupByCategory = false }: { items: Project
   return (
     <div className="space-y-10">
       {groups.map((g) => (
-        <Reveal key={g.cat} id={`category-${g.cat}`}>
+        <div key={g.cat} id={`category-${g.cat}`}>
           <div className="flex items-center gap-3 mb-3">
             <CategoryMotif category={g.cat} className="w-4 h-4 text-signal" />
             <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
@@ -63,11 +65,11 @@ export function ProjectGrid({ items, groupByCategory = false }: { items: Project
             </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {g.items.map((p) => (
-              <GridBox key={p.slug} p={p} />
+            {g.items.map((p, i) => (
+              <GridBox key={p.slug} p={p} index={i} />
             ))}
           </div>
-        </Reveal>
+        </div>
       ))}
     </div>
   );

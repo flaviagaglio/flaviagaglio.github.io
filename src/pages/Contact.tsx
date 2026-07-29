@@ -20,7 +20,7 @@ export function Contact() {
       <section className="max-w-3xl mx-auto px-5 sm:px-8 pt-6 pb-16">
         <p className="font-mono text-xs uppercase tracking-widest text-signal mb-4">Contact</p>
         <h1 className="text-4xl sm:text-5xl italic" style={{ fontFamily: "'Instrument Serif', serif" }}>
-          Let's talk.
+          Get in touch.
         </h1>
       </section>
 

@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { useInView } from '../hooks/useInView';
 import { cn } from '../lib/utils';
 
@@ -7,11 +7,13 @@ export function Reveal({
   className,
   as = 'div',
   id,
+  style,
 }: {
   children: ReactNode;
   className?: string;
   as?: 'div' | 'section';
   id?: string;
+  style?: CSSProperties;
 }) {
   const { ref, inView } = useInView<HTMLElement>();
   const cls = cn(
@@ -22,13 +24,13 @@ export function Reveal({
 
   if (as === 'section') {
     return (
-      <section ref={ref} id={id} className={cls}>
+      <section ref={ref} id={id} className={cls} style={style}>
         {children}
       </section>
     );
   }
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} id={id} className={cls}>
+    <div ref={ref as React.RefObject<HTMLDivElement>} id={id} className={cls} style={style}>
       {children}
     </div>
   );

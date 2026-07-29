@@ -55,10 +55,10 @@ export function Home() {
               style={{ fontFamily: "'Instrument Serif', serif" }}
             >
               <span className="block italic font-normal" style={{ letterSpacing: '-0.05em' }}>
-                Where signals
+                Things that work.
               </span>
               <span className="block font-normal -mt-1" style={{ letterSpacing: '-0.08em' }}>
-                reveal the truth.
+                And why they might not.
               </span>
             </h1>
             <p className="text-white/80 text-base sm:text-lg max-w-2xl mx-auto mt-8 leading-relaxed animate-fade-rise-delay">
@@ -196,7 +196,7 @@ export function Home() {
       {/* ============ CONTACT TEASER ============ */}
       <Reveal as="section" className="max-w-5xl mx-auto px-5 sm:px-8 pb-28 sm:pb-36 text-center">
         <h2 className="text-3xl sm:text-4xl italic mb-6" style={{ fontFamily: "'Instrument Serif', serif" }}>
-          Always up for a good conversation.
+          Open to new projects and opportunities.
         </h2>
         <Button variant="primary" size="lg" asChild>
           <Link to="/contact" onClick={withTransitionClick(navigate, '/contact')}>Get in touch</Link>
