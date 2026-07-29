@@ -28,6 +28,10 @@ function GridBox({ p, index }: { p: Project; index: number }) {
         onClick={withTransitionClick(navigate, to)}
         className="group liquid-glass relative overflow-hidden rounded-2xl hover:bg-white/[0.14] transition-colors h-48 p-5 flex flex-col gap-3"
       >
+        <div
+          className="warm-glow pointer-events-none absolute -right-8 -top-8 w-32 h-32 rounded-full"
+          style={{ animationDelay: `${(index % 5) * 0.6}s` }}
+        />
         <CategoryMotif category={p.category} className="absolute z-10 top-4 right-4 w-6 h-6 text-signal/60 transition-transform duration-300 group-hover:text-signal/90 group-hover:-rotate-6 group-hover:scale-110" />
         <span className="relative z-10 font-mono text-[0.62rem] uppercase tracking-wide text-signal">{categoryLabels[p.category]}</span>
         <h4

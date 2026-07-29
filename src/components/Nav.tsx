@@ -18,7 +18,15 @@ export function Nav() {
 
   return (
     <nav className="fixed top-0 inset-x-0 z-[100]">
-      <div className="liquid-glass absolute inset-x-0 top-0 h-20 sm:h-24 pointer-events-none" aria-hidden="true" />
+      <div
+        className="absolute inset-x-0 top-0 h-32 sm:h-40 pointer-events-none backdrop-blur-[2px]"
+        style={{
+          backgroundImage: 'linear-gradient(180deg, rgba(2,8,23,0.4) 0%, rgba(2,8,23,0.22) 40%, rgba(2,8,23,0) 100%)',
+          maskImage: 'linear-gradient(180deg, black 0%, black 40%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(180deg, black 0%, black 40%, transparent 100%)',
+        }}
+        aria-hidden="true"
+      />
       <div className="relative flex items-center justify-between px-5 py-5 sm:px-8 sm:py-6 max-w-7xl mx-auto">
         <NavLink
           to="/"

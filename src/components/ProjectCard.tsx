@@ -12,8 +12,9 @@ export function ProjectCard({ project }: { project: Project }) {
   const to = `/projects/${project.slug}`;
   return (
     <article className="liquid-glass rounded-3xl overflow-hidden flex flex-col">
-      <div className="relative aspect-[16/9] flex items-center justify-center bg-secondary/60 border-b border-border">
-        <CategoryMotif category={project.category} className="w-16 h-16 text-signal/50" />
+      <div className="relative aspect-[16/9] flex items-center justify-center bg-secondary/60 border-b border-border overflow-hidden">
+        <div className="warm-glow absolute w-40 h-40 rounded-full" />
+        <CategoryMotif category={project.category} className="relative z-10 w-16 h-16 text-signal/70" />
         <span className="absolute top-3 left-3 font-mono text-[0.65rem] uppercase tracking-wide text-muted-foreground">
           {categoryLabels[project.category]}
         </span>
