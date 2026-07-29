@@ -55,10 +55,10 @@ export function Home() {
               style={{ fontFamily: "'Instrument Serif', serif" }}
             >
               <span className="block italic font-normal" style={{ letterSpacing: '-0.05em' }}>
-                Things that work.
+                Where signals
               </span>
               <span className="block font-normal -mt-1" style={{ letterSpacing: '-0.08em' }}>
-                And why they might not.
+                reveal the truth.
               </span>
             </h1>
             <p className="text-white/80 text-base sm:text-lg max-w-2xl mx-auto mt-8 leading-relaxed animate-fade-rise-delay">
@@ -174,24 +174,28 @@ export function Home() {
       </Reveal>
 
       {/* ============ EDUCATION ============ */}
-      <Reveal as="section" className="max-w-5xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
-        <p className="font-mono text-xs uppercase tracking-widest text-signal mb-4">Education</p>
-        <h2 className="text-3xl sm:text-4xl mb-10 italic" style={{ fontFamily: "'Instrument Serif', serif" }}>
-          A short, real timeline.
-        </h2>
+      <section className="max-w-5xl mx-auto px-5 sm:px-8 pb-24 sm:pb-32">
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-widest text-signal mb-4">Education</p>
+          <h2 className="text-3xl sm:text-4xl mb-10 italic" style={{ fontFamily: "'Instrument Serif', serif" }}>
+            A short, real timeline.
+          </h2>
+        </Reveal>
         <div className="space-y-0 border-t border-border">
           {education.map((e, i) => (
-            <div key={e.title} className="grid grid-cols-[2.5rem_1fr] gap-4 py-6 border-b border-border">
-              <span className="font-mono text-sm text-signal">{String(i + 1).padStart(2, '0')}</span>
-              <div>
-                <h3 className="text-lg mb-1">{e.title}</h3>
-                <span className="font-mono text-[0.65rem] uppercase tracking-wide text-muted-foreground">{e.meta}</span>
-                <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{e.body}</p>
+            <Reveal key={e.title} style={{ transitionDelay: `${i * 120}ms` }}>
+              <div className="grid grid-cols-[2.5rem_1fr] gap-4 py-6 border-b border-border">
+                <span className="font-mono text-sm text-signal">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 className="text-lg mb-1">{e.title}</h3>
+                  <span className="font-mono text-[0.65rem] uppercase tracking-wide text-muted-foreground">{e.meta}</span>
+                  <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{e.body}</p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
-      </Reveal>
+      </section>
 
       {/* ============ CONTACT TEASER ============ */}
       <Reveal as="section" className="max-w-5xl mx-auto px-5 sm:px-8 pb-28 sm:pb-36 text-center">

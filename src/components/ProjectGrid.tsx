@@ -22,18 +22,25 @@ function GridBox({ p, index }: { p: Project; index: number }) {
   const navigate = useNavigate();
   const to = `/projects/${p.slug}`;
   return (
-    <Reveal className="rounded-2xl" style={{ transitionDelay: `${(index % 3) * 90}ms` }}>
+    <Reveal className="rounded-2xl h-full" style={{ transitionDelay: `${(index % 3) * 90}ms` }}>
       <Link
         to={to}
         onClick={withTransitionClick(navigate, to)}
-        className="group liquid-glass relative rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors p-5 flex flex-col gap-3 min-h-[160px]"
+        className="group liquid-glass relative overflow-hidden rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] transition-colors h-48 p-5 flex flex-col gap-3"
       >
-        <CategoryMotif category={p.category} className="absolute top-4 right-4 w-6 h-6 text-signal/40 transition-transform duration-300 group-hover:text-signal/70 group-hover:-rotate-6 group-hover:scale-110" />
-        <span className="font-mono text-[0.62rem] uppercase tracking-wide text-signal">{categoryLabels[p.category]}</span>
-        <h4 className="text-lg leading-snug max-w-[22ch] transition-transform duration-300 group-hover:translate-x-0.5" style={{ fontFamily: "'Instrument Serif', serif" }}>
+        <div
+          className="box-idle-glow pointer-events-none absolute -right-6 -top-6 w-28 h-28 rounded-full bg-signal/25 blur-2xl"
+          style={{ animationDelay: `${(index % 5) * 0.6}s` }}
+        />
+        <CategoryMotif category={p.category} className="absolute z-10 top-4 right-4 w-6 h-6 text-signal/60 transition-transform duration-300 group-hover:text-signal/90 group-hover:-rotate-6 group-hover:scale-110" />
+        <span className="relative z-10 font-mono text-[0.62rem] uppercase tracking-wide text-signal">{categoryLabels[p.category]}</span>
+        <h4
+          className="relative z-10 text-lg leading-snug line-clamp-2 max-w-[22ch] transition-transform duration-300 group-hover:translate-x-0.5"
+          style={{ fontFamily: "'Instrument Serif', serif" }}
+        >
           {p.title}
         </h4>
-        <StatusBadge project={p} className="mt-auto w-fit" />
+        <StatusBadge project={p} className="relative z-10 mt-auto w-fit" />
       </Link>
     </Reveal>
   );

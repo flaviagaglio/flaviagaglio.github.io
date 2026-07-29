@@ -1,11 +1,15 @@
+import { Link, useNavigate } from 'react-router-dom';
 import { NAV_HEIGHT } from '../components/Nav';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectGrid } from '../components/ProjectGrid';
 import { CategoryJump } from '../components/CategoryJump';
 import { Reveal } from '../components/Reveal';
+import { withTransitionClick } from '../lib/viewTransition';
 import { featuredProjects, otherProjects, projects } from '../data/projects';
 
 export function Projects() {
+  const navigate = useNavigate();
+
   return (
     <div className={NAV_HEIGHT}>
       <Reveal as="section" className="max-w-6xl mx-auto px-5 sm:px-8 pt-6 pb-16 sm:pb-20">
@@ -17,7 +21,13 @@ export function Projects() {
         </h1>
         <p className="text-muted-foreground max-w-xl mt-5">
           From the Master's thesis in progress to coursework built at 2am — every project here links to a real case
-          study. Where the code isn't public, that's noted plainly instead of a dead end.
+          study. Where the code isn't public, that's noted plainly instead of a dead end: it's academic work, and
+          publishing it isn't always appropriate. Depending on the specific project, I may be able to share it
+          privately on request —{' '}
+          <Link to="/contact" onClick={withTransitionClick(navigate, '/contact')} className="text-signal font-medium hover:text-signal/80">
+            get in touch
+          </Link>
+          .
         </p>
       </Reveal>
 

@@ -127,16 +127,15 @@ body {
   to { opacity: 1; transform: none; }
 }
 
-/* -------- hero video -------- */
-/* The source video is landscape (~16:9). On tall/narrow (portrait)
-   viewports, object-cover crops the sides hard enough to truncate the
-   scene — switch to contain there instead, letterboxing top/bottom in
-   the same navy as the page background so it reads as intentional. */
-@media (max-aspect-ratio: 4/5) {
-  .hero-video {
-    object-fit: contain;
-    background-color: #020817;
-  }
+/* -------- project box idle glow -------- */
+/* Runs continuously, independent of hover/scroll, so cards never read
+   as flat/static even at rest — staggered per-card via animation-delay. */
+@keyframes box-idle-glow {
+  0%, 100% { opacity: 0.35; transform: scale(0.9); }
+  50% { opacity: 0.75; transform: scale(1.1); }
+}
+.box-idle-glow {
+  animation: box-idle-glow 4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -147,6 +146,10 @@ body {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+  .box-idle-glow {
+    animation: none;
+    opacity: 0.5;
   }
   * {
     animation-duration: 0.01ms !important;
