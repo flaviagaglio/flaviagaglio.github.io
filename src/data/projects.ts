@@ -298,21 +298,31 @@ export const projects: Project[] = [
   },
   {
     slug: 'male-infertility-prediction',
-    title: 'Male Infertility Prediction',
+    title: 'Male Infertility Prediction from Clinical Andrology Data',
     category: 'ml',
-    summary: 'Implemented and optimized Decision Trees, MLP and SVM for classifying medical datasets, achieving high accuracy in infertility prediction.',
-    stack: ['Python', 'Decision Trees', 'MLP', 'SVM'],
-    status: 'academic-private',
+    summary:
+      'Research project classifying Controls vs Infertile subjects from clinical andrology data: 13 tuned model configurations across Decision Trees, MLP, SVM and gradient-boosting ensembles, validated with repeated/nested cross-validation, statistical significance testing and SHAP explainability.',
+    stack: ['Python', 'scikit-learn', 'XGBoost', 'LightGBM', 'Optuna', 'SHAP'],
+    status: 'public-code',
     featured: false,
-    metrics: [{ label: 'Models compared', value: '3 (DT, MLP, SVM)' }],
+    metrics: [
+      { label: 'Models compared', value: '13 configs, 6 families' },
+      { label: 'Best F1 (held-out)', value: '0.740' },
+      { label: 'Explainability', value: 'SHAP + permutation' },
+    ],
     body: {
-      problem: 'Medical classification datasets are typically small and imbalanced, which makes model choice and tuning matter more than usual.',
-      approach: 'Implemented and tuned three classifier families — Decision Trees, MLP, and SVM — on a medical dataset for infertility prediction, comparing their performance directly.',
-      architecture: 'Three independently trained and hyperparameter-tuned classifiers, evaluated under the same cross-validation setup for a fair comparison.',
-      results: 'Achieved high accuracy on the classification task in the reported evaluation setup, with the tuned models outperforming untuned baselines.',
-      limits: 'Medical dataset is small by clinical standards; high accuracy on it does not by itself establish clinical validity or generalization to new populations.',
+      problem:
+        'Distinguishing infertile from control subjects from clinical data is not a trivially separable problem — no single feature correlates with the outcome above r≈0.4 — and a clinical setting demands results trustworthy enough to discuss with a physician, not just an accuracy number.',
+      approach:
+        'Built a leakage-free scikit-learn pipeline (imputation, encoding, scaling, mutual-information feature selection) around 13 tuned configurations: the three required families — Decision Tree, MLP, SVM, 3 configurations each — plus Random Forest, Gradient Boosting, XGBoost and a LightGBM model tuned via Bayesian optimization (Optuna), then combined the best three into a stacking ensemble.',
+      architecture:
+        'Every model is a full Pipeline (preprocessing → feature selection → classifier) fit only on the training fold, tuned via grid/randomized search or Optuna. Validated with a held-out test split, repeated and nested stratified cross-validation, McNemar and bootstrap significance tests, calibration curves, and an external validation subset with structurally missing features imputed only by the training-fitted pipeline.',
+      results:
+        "Best held-out F1 of 0.740 (Gradient Boosting, ROC-AUC 0.749), but McNemar and bootstrap tests show the top five models are statistically indistinguishable — reported as an honest finding rather than overselling a single 'winner'. SHAP and permutation importance independently converge on age and WHO semen parameters as the dominant predictors, with no reliance on socio-demographic shortcuts, which validates clinical plausibility rather than just accuracy.",
+      limits:
+        "The external validation subset is small (209 records) and missing three features by design, so it stresses robustness under missing data more than it proves generalization to a new population; and like most clinical datasets available for this kind of work, it doesn't include hormonal or genetic variables that could sharpen the signal further.",
     },
-    links: {},
+    links: { code: 'https://github.com/flaviagaglio/male-infertility-prediction-ml' },
   },
   {
     slug: 'vinyl-lottery',
