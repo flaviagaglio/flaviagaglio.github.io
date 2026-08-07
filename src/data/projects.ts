@@ -64,7 +64,7 @@ export const projects: Project[] = [
       "A real-time 3D simulation of a collapsing star, from event-horizon formation through a Planck-density quantum bounce, contrasting Einstein's classical singularity with Rovelli's Loop Quantum Gravity rebound — with a scrubbable timeline, a dual relativistic clock, and a cinematic guided tour.",
     stack: ['React', 'TypeScript', 'Three.js', 'React Three Fiber', 'GLSL', 'Tailwind CSS', 'GSAP'],
     status: 'live-demo',
-    featured: true,
+    featured: false,
     metrics: [
       { label: 'Timeline', value: '4-phase, scrubbable' },
       { label: 'Particles', value: '13k, GPU-driven' },
