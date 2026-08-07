@@ -1,0 +1,37 @@
+name: Sync tool demos
+
+# The passwords, keys and mode-finder repos don't have their own GitHub
+# Pages - the only thing actually served at flaviagaglio.github.io/<tool>/
+# is the copy under public/<tool>/. This keeps that copy in sync with each
+# repo's main branch automatically instead of relying on someone remembering
+# to copy the file by hand (see .github/scripts/sync-tools.py for why that
+# already went wrong more than once).
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: python3 .github/scripts/sync-tools.py
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then
+            echo "Nothing to sync."
+            exit 0
+          fi
+          changed=$(cat /tmp/sync-tools-changed.txt)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/passwords/index.html public/keys/index.html public/mode-finder/index.html
+          git commit -m "Sync tool demos: ${changed}"
+          git push
