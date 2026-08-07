@@ -145,6 +145,37 @@ export const projects: Project[] = [
     links: {},
   },
   {
+    slug: 'air-synth',
+    title: 'Air-Synth — Gesture-Controlled Synthesizer',
+    category: 'audio',
+    summary:
+      'A real, playable synthesizer controlled entirely by hand gestures over webcam — no install, no MIDI controller. Right hand plays scale-quantized melody by pinch and position; left hand shapes filter, resonance and reverb/delay in real time, across three DSP engines inspired by Mutable Instruments Plaits.',
+    stack: ['TypeScript', 'Vite', 'Tone.js', 'MediaPipe Tasks Vision', 'AudioWorklet', 'Web Audio API'],
+    status: 'live-demo',
+    featured: true,
+    metrics: [
+      { label: 'Oscillator engines', value: '3 (Superwave, Karplus-Strong, Wavetable)' },
+      { label: 'Scales', value: '4, always in-tune' },
+      { label: 'Control latency', value: 'Smoothed, sub-frame' },
+    ],
+    body: {
+      problem:
+        "Webcam hand-tracking demos are common; instruments you'd actually want to keep playing are not. The hard part isn't detecting a hand, it's turning noisy, frame-to-frame landmark jitter into something that sounds intentional — and making a mapping simple enough that the first gesture someone tries already sounds musical, with no way to hit a wrong note.",
+      approach:
+        "Right hand: vertical position is quantized live onto a musical scale (Minor/Major Pentatonic, Dorian, or Hijaz) across two octaves, so pitch is always in-key; a thumb-index pinch triggers the note, and how tightly you pinch sets its velocity. Left hand: position drives filter cutoff (mapped exponentially, since pitch/cutoff perception is logarithmic) and resonance, pinch brings in reverb/delay, and a closed fist mutes everything for pauses. Every one of those signals passes through one-pole exponential smoothing plus a freeze-then-decay fallback before it ever touches an audio parameter, so a hand briefly leaving frame glides to a safe default instead of clicking or jumping.",
+      architecture:
+        "MediaPipe's HandLandmarker runs client-side against the raw (unmirrored) camera feed while the video displays CSS-mirrored for a natural selfie view — correcting MediaPipe's handedness labels for that mismatch is the single most common source of bugs in this kind of project, so it's handled explicitly and deliberately. Audio runs on Tone.js for scheduling and effects, plus two hand-written AudioWorkletProcessors — a Karplus-Strong plucked-string model (a noise burst decaying through a damped delay loop) and a wavetable oscillator morphing between procedurally generated single-cycle frames — for the two engines Tone's built-ins can't do alone. All three share one signal chain: light saturation into a multimode filter into an ADSR envelope into parallel reverb/delay sends.",
+      results:
+        'A genuinely playable instrument where the default patch already sounds intentional with no tweaking, verified end-to-end with a headless-browser smoke test (fake camera and audio devices) that caught and fixed two real bugs before ship: the AudioWorklet files silently failing to bundle, and HUD text rendering mirrored because it shared a canvas with the mirrored hand-skeleton overlay.',
+      limits:
+        "Hand-tracking accuracy depends on lighting and camera quality like any webcam CV system, and playing two independent hands at once is naturally easier with the camera propped up than hand-held on a phone. DSP constants (pinch/fist thresholds, string damping) are tuned heuristically rather than against a large gesture dataset.",
+    },
+    links: {
+      demo: 'https://flaviagaglio.github.io/air-synth/',
+      code: 'https://github.com/flaviagaglio/air-synth',
+    },
+  },
+  {
     slug: 'cartographer',
     title: 'Cartographer — Interactive Audio Similarity Map',
     category: 'audio',
