@@ -96,7 +96,7 @@ export const projects: Project[] = [
     stack: ['Python', 'Anti-Spoofing', 'rPPG', 'Signal Processing', 'Biometrics'],
     status: 'academic-private',
     stage: 'Ongoing',
-    featured: true,
+    featured: false,
     metrics: [
       { label: 'Stage', value: "Master's thesis" },
       { label: 'Modalities', value: 'Fingerprint + face' },
