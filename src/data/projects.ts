@@ -183,7 +183,7 @@ export const projects: Project[] = [
       'Acoustic space engine and Music Information Retrieval (MIR) web app. Extracts DSP features (Spectral Centroid, RMS, 13 MFCCs) from audio files, normalizes metrics via Z-Score, and projects them into 2D space using UMAP for real-time sound navigation.',
     stack: ['TypeScript', 'Web Audio API', 'DSP / Meyda', 'UMAP', 'HTML5 Canvas'],
     status: 'live-demo',
-    featured: true,
+    featured: false,
     metrics: [
       { label: 'Features', value: '15 (13 MFCC + 2)' },
       { label: 'Projection', value: 'UMAP → 2D' },
