@@ -93,7 +93,7 @@ export const projects: Project[] = [
       'Designed and evaluated a facial recognition system using MTCNN for face detection and InceptionResNetV1 for feature extraction.',
     stack: ['Python', 'MTCNN', 'InceptionResNetV1'],
     status: 'academic-private',
-    featured: true,
+    featured: false,
     metrics: [
       { label: 'Detection', value: 'MTCNN' },
       { label: 'Embedding', value: 'InceptionResNetV1' },
@@ -314,7 +314,7 @@ export const projects: Project[] = [
       'Research project classifying Controls vs Infertile subjects from clinical andrology data: 13 tuned model configurations across Decision Trees, MLP, SVM and gradient-boosting ensembles, validated with repeated/nested cross-validation, statistical significance testing and SHAP explainability.',
     stack: ['Python', 'scikit-learn', 'XGBoost', 'LightGBM', 'Optuna', 'SHAP'],
     status: 'public-code',
-    featured: false,
+    featured: true,
     metrics: [
       { label: 'Models compared', value: '13 configs, 6 families' },
       { label: 'Best F1 (held-out)', value: '0.740' },
