@@ -250,7 +250,7 @@ export const projects: Project[] = [
       'University NLP project: fine-tuned Italian BERT (dbmdz/bert-base-italian-cased) for VAD emotion regression (Valence, Arousal, Dominance) on the EmoITA dataset, comparing three single-target models against one joint multi-target model.',
     stack: ['Python', 'PyTorch', 'BERT', 'Transformers', 'NLP'],
     status: 'public-code',
-    featured: false,
+    featured: true,
     metrics: [
       { label: 'Type', value: 'University project' },
       { label: 'Best Pearson r', value: '0.71 (Valence)' },
