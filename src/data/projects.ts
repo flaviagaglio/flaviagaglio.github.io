@@ -152,7 +152,7 @@ export const projects: Project[] = [
       'Real-time 2D astrophysical simulation engine modeling N-body gravitational interactions. Features classic mechanics integration, vector decomposition with softening factors, interactive stochastic mass injection, and a brutalist hardware-inspired HUD.',
     stack: ['JavaScript', 'HTML5 Canvas', 'Astrophysics', 'Numerical Simulation'],
     status: 'live-demo',
-    featured: true,
+    featured: false,
     metrics: [
       { label: 'Model', value: 'N-body gravity' },
       { label: 'Integration', value: 'Softened vectors' },
@@ -244,21 +244,31 @@ export const projects: Project[] = [
   },
   {
     slug: 'emotion-detection-italian',
-    title: 'Emotion Detection in Italian Text',
+    title: 'Emotion Detection in Italian Text (VAD Regression)',
     category: 'nlp',
-    summary: 'Fine-tuned a BERT-based transformer (emotivITA) to identify emotional dimensions in Italian datasets.',
-    stack: ['Python', 'BERT', 'NLP'],
-    status: 'academic-private',
+    summary:
+      'University NLP project: fine-tuned Italian BERT (dbmdz/bert-base-italian-cased) for VAD emotion regression (Valence, Arousal, Dominance) on the EmoITA dataset, comparing three single-target models against one joint multi-target model.',
+    stack: ['Python', 'PyTorch', 'BERT', 'Transformers', 'NLP'],
+    status: 'public-code',
     featured: false,
-    metrics: [{ label: 'Base model', value: 'emotivITA (BERT)' }, { label: 'Language', value: 'Italian' }],
+    metrics: [
+      { label: 'Type', value: 'University project' },
+      { label: 'Best Pearson r', value: '0.71 (Valence)' },
+      { label: 'Approach', value: 'Single- vs multi-target' },
+    ],
     body: {
-      problem: 'Most emotion-detection resources and pretrained models target English; Italian text needs models and evaluation of its own.',
-      approach: 'Fine-tuned emotivITA, a BERT-based transformer pretrained for Italian, on labeled data to classify emotional dimensions in text.',
-      architecture: 'Standard transformer fine-tuning: pretrained BERT encoder plus a classification head, trained on the target emotion-labeled dataset.',
-      results: 'Produced a working Italian emotion classifier built on a pretrained transformer rather than training a language model from scratch.',
-      limits: 'Performance is bound by the labeled dataset used for fine-tuning, which is smaller and narrower than the corpora used to pretrain the base model.',
+      problem:
+        'Predicting continuous emotional dimensions (Valence, Arousal, Dominance) from text needs a language-specific model for Italian, where affective-computing resources are far scarcer than for English, plus an explicit comparison of modeling strategies rather than a single untested design choice.',
+      approach:
+        'Fine-tuned dbmdz/bert-base-italian-cased on the EmoITA dataset under two competing setups: three single-target regressors (one BERT per dimension) versus one multi-target regressor predicting V, A and D jointly, freezing the bottom transformer layers and training only the top layers plus a linear regression head.',
+      architecture:
+        'Both setups share the same backbone, loss (SmoothL1) and training loop with early stopping on validation loss; they differ only in the regression head\'s output size (1 vs 3) and whether each dimension is trained as a separate model or jointly.',
+      results:
+        'Pearson r between 0.54 and 0.71 and MAE between 0.28 and 0.36 (on a 1-5 scale) across both setups. The joint model reached the highest single-dimension correlation (Valence, r=0.71), while the three single-target models were more consistent across dimensions — both approaches are reported side by side rather than declaring a single "winner".',
+      limits:
+        'A university project evaluated on the EmoITA benchmark rather than production-scale or multi-domain Italian text; the single-target setup also evaluates directly against gold labels rather than the full blind-submission protocol of the original challenge, a simplification disclosed in the repository.',
     },
-    links: {},
+    links: { code: 'https://github.com/flaviagaglio/EmotivITA-BERT-VAD' },
   },
   {
     slug: 'handwriting-analysis',
