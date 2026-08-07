@@ -57,6 +57,37 @@ export const categoryLabels: Record<ProjectCategory, string> = {
 
 export const projects: Project[] = [
   {
+    slug: 'echoes-of-planck',
+    title: 'Echoes of Planck — Quantum Bounce & Spacetime Curvature',
+    category: 'astrophysics',
+    summary:
+      "A real-time 3D simulation of a collapsing star, from event-horizon formation through a Planck-density quantum bounce, contrasting Einstein's classical singularity with Rovelli's Loop Quantum Gravity rebound — with a scrubbable timeline, a dual relativistic clock, and a cinematic guided tour.",
+    stack: ['React', 'TypeScript', 'Three.js', 'React Three Fiber', 'GLSL', 'Tailwind CSS', 'GSAP'],
+    status: 'live-demo',
+    featured: true,
+    metrics: [
+      { label: 'Timeline', value: '4-phase, scrubbable' },
+      { label: 'Particles', value: '13k, GPU-driven' },
+      { label: 'Physics modes', value: 'GR vs. LQG' },
+    ],
+    body: {
+      problem:
+        "Popular explanations of black holes tend to stop at the event horizon, and the idea that general relativity and loop quantum gravity actually predict different endings for a collapsing star — a singularity versus a bounce — rarely gets shown, only described. The goal was to make that divergence something you can scrub through and compare directly, not just read about.",
+      approach:
+        "The whole simulation is driven by one normalized timeline value t ∈ [0,1], mapped through a mode-dependent radius curve (radiusAtTime) shared by every visual: the spacetime grid's funnel depth, the event horizon's scale, the accretion disc's intensity, and the HUD's live readouts all read the same number, so nothing can drift out of sync. A physics-mode switch (Einstein vs. Rovelli) changes that curve's behavior specifically at the Planck-density phase — one asymptotes toward a singularity, the other hits a floor and rebounds into a white hole — and the phase narration itself diverges accordingly rather than just the visuals.",
+      architecture:
+        "Three isolated layers: a physics-engine of pure TypeScript functions (no React, no Three.js) computing the collapse curve, a Schwarzschild time-dilation integral precomputed into a lookup table for drift-free scrubbing, and an LQG quantization-strength curve; a React Three Fiber scene of hand-written GLSL shaders (a turbulent-noise accretion disc, a fresnel-rim event horizon, a GPU-displaced spacetime grid, and a ~13k-particle field simulated entirely in the vertex shader); and a presentational HUD layer reading the same Zustand store. A custom screen-space lensing post-effect warps the composited frame around the hole's projected position instead of ray-tracing bent light.",
+      results:
+        'A fully responsive, 60fps-targeting simulation — desktop instrument-cluster HUD down to a stacked, collapsible mobile layout — with a GSAP-driven cinematic tour that scripts the camera and timeline together with poetic + scientific narration for each phase.',
+      limits:
+        'A stylized, pop-science visualization rather than a numerical relativity solver — the equations it encodes (Schwarzschild dilation, a Planck-density floor) are real, but the collapse curves themselves are hand-tuned for visual and narrative clarity, not integrated from first principles.',
+    },
+    links: {
+      demo: 'https://flaviagaglio.github.io/echoes-of-planck/',
+      code: 'https://github.com/flaviagaglio/echoes-of-planck',
+    },
+  },
+  {
     slug: 'biometric-anti-spoofing-thesis',
     title: 'Biometric Anti-Spoofing via Perspiration & Facial rPPG',
     category: 'biometrics',
