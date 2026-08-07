@@ -6,34 +6,32 @@
     <title>Keys · Flavia Gaglio</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0 !important; }
         :root {
-            --ink: #141310;
-            --cream: #efe6d3;
-            --panel: #f7f1e3;
-            --orange: #ff4d1c;
-            --blue: #1c3fff;
+            --te-border: #1a1a1a;
+            --te-dark: #121315;
+            --te-chassis: #e5e1d5;
+            --te-cream-bg: #f2efe6;
+            --te-panel: #dcd7c8;
+            --te-orange: #ff4400;
+            --te-blue: #1c3fff;
         }
         body {
-            background: var(--cream);
+            background: var(--te-cream-bg);
             font-family: 'Space Grotesk', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1.25rem;
+            color: var(--te-border);
         }
         .container {
             max-width: 1200px;
             width: 100%;
-            background:
-                radial-gradient(circle 3px at 18px 18px, var(--ink) 100%, transparent 101%),
-                radial-gradient(circle 3px at calc(100% - 18px) 18px, var(--ink) 100%, transparent 101%),
-                radial-gradient(circle 3px at 18px calc(100% - 18px), var(--ink) 100%, transparent 101%),
-                radial-gradient(circle 3px at calc(100% - 18px) calc(100% - 18px), var(--ink) 100%, transparent 101%),
-                var(--panel);
-            border: 3px solid var(--ink);
-            border-radius: 4px;
+            background: var(--te-chassis);
+            border: 3px solid var(--te-border);
+            box-shadow: 8px 8px 0 var(--te-dark);
             padding: 2rem 1.5rem;
         }
         @media (min-width: 768px) {
@@ -45,7 +43,7 @@
         h1 {
             font-size: 2.2rem;
             font-weight: 700;
-            color: var(--ink);
+            color: var(--te-border);
             text-align: center;
             letter-spacing: -0.02em;
             text-transform: uppercase;
@@ -60,7 +58,7 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: rgba(20, 19, 16, 0.55);
+            color: rgba(26, 26, 26, 0.55);
             display: table;
             margin: 0 auto 2rem;
             width: auto;
@@ -72,15 +70,14 @@
             text-underline-offset: 2px;
         }
         .byline a:hover {
-            color: var(--orange);
+            color: var(--te-orange);
         }
         @media (min-width: 768px) {
             .byline { font-size: 0.8rem; margin-bottom: 2.5rem; }
         }
         .selector-area {
-            background: var(--cream);
-            border: 2px solid var(--ink);
-            border-radius: 4px;
+            background: var(--te-panel);
+            border: 2px solid var(--te-border);
             padding: 1.25rem;
             margin-bottom: 1.5rem;
         }
@@ -92,7 +89,7 @@
         .selector-label {
             text-align: center;
             font-family: 'Space Mono', monospace;
-            color: var(--ink);
+            color: var(--te-border);
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
@@ -112,7 +109,7 @@
         .note-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.6rem;
             justify-content: center;
             margin-bottom: 1.25rem;
             counter-reset: note;
@@ -120,17 +117,17 @@
         .note-btn {
             counter-increment: note;
             position: relative;
-            background: var(--panel);
-            border: 2px solid var(--ink);
-            border-radius: 3px;
-            color: var(--ink);
+            background: var(--te-cream-bg);
+            border: 2px solid var(--te-border);
+            box-shadow: 3px 3px 0 var(--te-border);
+            color: var(--te-border);
             padding: 0.6rem 0.85rem 0.5rem;
             font-weight: 700;
             font-size: 0.9rem;
             font-family: 'Space Grotesk', sans-serif;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.08s ease;
+            transition: 0.08s ease;
             min-width: 72px;
             flex: 0 1 auto;
         }
@@ -162,21 +159,22 @@
             background: #ffffff;
         }
         .note-btn:active {
-            transform: translateY(2px);
+            transform: translate(3px, 3px);
+            box-shadow: none;
         }
         .note-btn.selected {
-            background: var(--orange);
-            border-color: var(--ink);
-            color: var(--ink);
+            background: var(--te-orange);
+            border-color: var(--te-border);
+            color: var(--te-border);
         }
         .note-btn.selected::before {
             opacity: 0.55;
         }
         .calculate-btn {
-            background: var(--ink);
-            color: var(--cream);
-            border: 2px solid var(--ink);
-            border-radius: 3px;
+            background: var(--te-border);
+            color: var(--te-cream-bg);
+            border: 2px solid var(--te-border);
+            box-shadow: 4px 4px 0 var(--te-orange);
             padding: 0.95rem 2rem;
             font-weight: 700;
             font-size: 0.85rem;
@@ -188,7 +186,7 @@
             max-width: 320px;
             margin: 0.25rem auto 0;
             display: block;
-            transition: all 0.08s ease;
+            transition: 0.08s ease;
         }
         @media (min-width: 768px) {
             .calculate-btn {
@@ -198,15 +196,16 @@
             }
         }
         .calculate-btn:hover {
-            background: var(--orange);
-            color: var(--ink);
+            background: var(--te-orange);
+            color: var(--te-border);
         }
         .calculate-btn:active {
-            transform: translateY(2px);
+            transform: translate(4px, 4px);
+            box-shadow: none;
         }
         .results-label {
             font-family: 'Space Mono', monospace;
-            color: var(--ink);
+            color: var(--te-border);
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
@@ -234,16 +233,15 @@
             }
         }
         .result-card {
-            background: var(--panel);
-            border: 2px solid var(--ink);
-            border-radius: 3px;
+            background: var(--te-panel);
+            border: 2px solid var(--te-border);
             padding: 1.5rem;
             text-align: center;
         }
         .key-name {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--ink);
+            color: var(--te-border);
             text-transform: uppercase;
             margin-bottom: 0.3rem;
         }
@@ -255,14 +253,14 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.04em;
-            color: var(--ink);
+            color: var(--te-border);
             opacity: 0.55;
             margin-bottom: 1.1rem;
         }
         .accidentals-count {
             font-family: 'Space Mono', monospace;
             font-size: 0.75rem;
-            color: var(--ink);
+            color: var(--te-border);
             margin-bottom: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -271,19 +269,18 @@
         .accidentals-list {
             font-size: 1.2rem;
             font-weight: 700;
-            background: var(--cream);
+            background: var(--te-cream-bg);
             padding: 0.65rem 1rem;
-            border-radius: 3px;
             display: inline-block;
-            border: 2px solid var(--ink);
+            border: 2px solid var(--te-border);
         }
         .accidental-note {
             display: inline-block;
             margin: 0 0.22rem;
             font-weight: 700;
         }
-        .sharp { color: var(--orange); }
-        .flat { color: var(--blue); }
+        .sharp { color: var(--te-orange); }
+        .flat { color: var(--te-blue); }
     </style>
 </head>
 <body>
