@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
@@ -292,78 +292,78 @@
         <div class="byline">by <a href="https://flaviagaglio.github.io" target="_blank" rel="noopener">Flavia Gaglio</a></div>
 
         <div class="selector-area">
-            <div class="selector-label">circolo delle quinte</div>
+            <div class="selector-label">circle of fifths</div>
             <div class="note-grid" id="noteGrid"></div>
-            <button class="calculate-btn" id="calculate">Scopri l'armatura</button>
+            <button class="calculate-btn" id="calculate">Find Key Signature</button>
         </div>
 
-        <div class="results-label">armatura</div>
+        <div class="results-label">key signature</div>
         <div id="resultsContainer" class="results-grid"></div>
     </div>
 
     <script>
         (function() {
-            // Ordine di comparsa delle alterazioni nel circolo delle quinte
-            // (i bemolli seguono l'ordine esattamente inverso dei diesis).
-            const SHARP_ORDER = ["Fa", "Do", "Sol", "Re", "La", "Mi", "Si"];
-            const FLAT_ORDER  = ["Si", "Mi", "La", "Re", "Sol", "Do", "Fa"];
+            // Order in which accidentals appear around the circle of fifths
+            // (flats follow the exact reverse order of sharps).
+            const SHARP_ORDER = ["F", "C", "G", "D", "A", "E", "B"];
+            const FLAT_ORDER  = ["B", "E", "A", "D", "G", "C", "F"];
 
-            // Ogni tonalità è definita solo da quante alterazioni ha e di che
-            // tipo: le note alterate si calcolano prendendo le prime `count`
-            // note di SHARP_ORDER/FLAT_ORDER, non vanno elencate a mano.
+            // Each key is defined only by how many accidentals it has and of
+            // which kind: the altered notes are derived by taking the first
+            // `count` notes of SHARP_ORDER/FLAT_ORDER, not listed by hand.
             const MAJOR_SIGNATURES = {
-                "Do":    { count: 0, type: 'none' },
-                "Do♭":   { count: 7, type: 'b' },
-                "Do♯":   { count: 7, type: '#' },
-                "Re♭":   { count: 5, type: 'b' },
-                "Re":    { count: 2, type: '#' },
-                "Mi♭":   { count: 3, type: 'b' },
-                "Mi":    { count: 4, type: '#' },
-                "Fa":    { count: 1, type: 'b' },
-                "Fa♯":   { count: 6, type: '#' },
-                "Sol♭":  { count: 6, type: 'b' },
-                "Sol":   { count: 1, type: '#' },
-                "Sol♯":  { count: 5, type: '#' },
-                "La♭":   { count: 4, type: 'b' },
-                "La":    { count: 3, type: '#' },
-                "Si♭":   { count: 2, type: 'b' },
-                "Si":    { count: 5, type: '#' }
+                "C":  { count: 0, type: 'none' },
+                "C♭": { count: 7, type: 'b' },
+                "C♯": { count: 7, type: '#' },
+                "D♭": { count: 5, type: 'b' },
+                "D":  { count: 2, type: '#' },
+                "E♭": { count: 3, type: 'b' },
+                "E":  { count: 4, type: '#' },
+                "F":  { count: 1, type: 'b' },
+                "F♯": { count: 6, type: '#' },
+                "G♭": { count: 6, type: 'b' },
+                "G":  { count: 1, type: '#' },
+                "G♯": { count: 5, type: '#' },
+                "A♭": { count: 4, type: 'b' },
+                "A":  { count: 3, type: '#' },
+                "B♭": { count: 2, type: 'b' },
+                "B":  { count: 5, type: '#' }
             };
 
             function getAccidentals(count, type) {
                 if (type === 'none' || count === 0) return [];
                 const order = type === '#' ? SHARP_ORDER : FLAT_ORDER;
                 const symbol = type === '#' ? '♯' : '♭';
-                return order.slice(0, count).map(nota => nota + symbol);
+                return order.slice(0, count).map(note => note + symbol);
             }
 
             const NOTE_LABELS = [
-                "Do", "Sol", "Re", "La", "Mi", "Si/Do♭", "Fa♯/Sol♭", "Re♭/Do♯",
-                "La♭", "Mi♭", "Si♭", "Fa"
+                "C", "G", "D", "A", "E", "B/C♭", "F♯/G♭", "D♭/C♯",
+                "A♭", "E♭", "B♭", "F"
             ];
 
-            const TONALITA_PER_ETICHETTA = {
-                "Do": [ { maggiore: "Do", minore: "La" } ],
-                "Sol": [ { maggiore: "Sol", minore: "Mi" } ],
-                "Re": [ { maggiore: "Re", minore: "Si" } ],
-                "La": [ { maggiore: "La", minore: "Fa♯" } ],
-                "Mi": [ { maggiore: "Mi", minore: "Do♯" } ],
-                "Si/Do♭": [
-                    { maggiore: "Si", minore: "Sol♯" },
-                    { maggiore: "Do♭", minore: "La♭" }
+            const KEYS_BY_LABEL = {
+                "C": [ { major: "C", minor: "A" } ],
+                "G": [ { major: "G", minor: "E" } ],
+                "D": [ { major: "D", minor: "B" } ],
+                "A": [ { major: "A", minor: "F♯" } ],
+                "E": [ { major: "E", minor: "C♯" } ],
+                "B/C♭": [
+                    { major: "B", minor: "G♯" },
+                    { major: "C♭", minor: "A♭" }
                 ],
-                "Fa♯/Sol♭": [
-                    { maggiore: "Fa♯", minore: "Re♯" },
-                    { maggiore: "Sol♭", minore: "Mi♭" }
+                "F♯/G♭": [
+                    { major: "F♯", minor: "D♯" },
+                    { major: "G♭", minor: "E♭" }
                 ],
-                "Re♭/Do♯": [
-                    { maggiore: "Re♭", minore: "Si♭" },
-                    { maggiore: "Do♯", minore: "La♯" }
+                "D♭/C♯": [
+                    { major: "D♭", minor: "B♭" },
+                    { major: "C♯", minor: "A♯" }
                 ],
-                "La♭": [ { maggiore: "La♭", minore: "Fa" } ],
-                "Mi♭": [ { maggiore: "Mi♭", minore: "Do" } ],
-                "Si♭": [ { maggiore: "Si♭", minore: "Sol" } ],
-                "Fa": [ { maggiore: "Fa", minore: "Re" } ]
+                "A♭": [ { major: "A♭", minor: "F" } ],
+                "E♭": [ { major: "E♭", minor: "C" } ],
+                "B♭": [ { major: "B♭", minor: "G" } ],
+                "F": [ { major: "F", minor: "D" } ]
             };
 
             let selectedIndex = 0;
@@ -384,8 +384,8 @@
                 noteGrid.appendChild(btn);
             });
 
-            function createCard(maggiore, minore) {
-                const sig = MAJOR_SIGNATURES[maggiore];
+            function createCard(major, minor) {
+                const sig = MAJOR_SIGNATURES[major];
                 if (!sig) return null;
 
                 const card = document.createElement('div');
@@ -393,35 +393,38 @@
 
                 const nameEl = document.createElement('div');
                 nameEl.className = 'key-name';
-                nameEl.textContent = `${maggiore} maggiore`;
+                nameEl.textContent = `${major} major`;
                 card.appendChild(nameEl);
 
                 const relEl = document.createElement('div');
                 relEl.className = 'relative-minor';
-                relEl.textContent = `relativa minore: ${minore}`;
+                relEl.textContent = `relative minor: ${minor}`;
                 card.appendChild(relEl);
 
                 if (sig.count === 0) {
                     const countEl = document.createElement('div');
                     countEl.className = 'accidentals-count';
-                    countEl.textContent = 'nessuna alterazione';
+                    countEl.textContent = 'no accidentals';
                     card.appendChild(countEl);
                     const listEl = document.createElement('div');
                     listEl.className = 'accidentals-list';
                     listEl.innerHTML = '♮';
                     card.appendChild(listEl);
                 } else {
-                    const tipo = sig.type === '#' ? 'diesis' : 'bemolli';
+                    const isSharp = sig.type === '#';
+                    const kind = isSharp
+                        ? (sig.count === 1 ? 'sharp' : 'sharps')
+                        : (sig.count === 1 ? 'flat' : 'flats');
                     const countEl = document.createElement('div');
                     countEl.className = 'accidentals-count';
-                    countEl.textContent = `${sig.count} ${tipo}`;
+                    countEl.textContent = `${sig.count} ${kind}`;
                     card.appendChild(countEl);
 
                     const listEl = document.createElement('div');
                     listEl.className = 'accidentals-list';
-                    const classe = sig.type === '#' ? 'sharp' : 'flat';
+                    const cssClass = isSharp ? 'sharp' : 'flat';
                     listEl.innerHTML = getAccidentals(sig.count, sig.type)
-                        .map(nota => `<span class="accidental-note ${classe}">${nota}</span>`)
+                        .map(note => `<span class="accidental-note ${cssClass}">${note}</span>`)
                         .join('');
                     card.appendChild(listEl);
                 }
@@ -431,13 +434,13 @@
 
             function renderKeys() {
                 const label = NOTE_LABELS[selectedIndex];
-                const tonalitaList = TONALITA_PER_ETICHETTA[label];
-                if (!tonalitaList) return;
+                const keysList = KEYS_BY_LABEL[label];
+                if (!keysList) return;
 
                 resultsContainer.innerHTML = '';
 
-                tonalitaList.forEach(item => {
-                    const card = createCard(item.maggiore, item.minore);
+                keysList.forEach(item => {
+                    const card = createCard(item.major, item.minor);
                     if (card) resultsContainer.appendChild(card);
                 });
             }
