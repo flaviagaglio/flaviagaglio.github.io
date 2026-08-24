@@ -369,6 +369,34 @@ export const projects: Project[] = [
     links: {},
   },
   {
+    slug: 'topological-latent-regularizer',
+    title: 'Topological Latent Space Regularizer',
+    category: 'ml',
+    summary:
+      'A PyTorch autoencoder regularized by differentiable persistent homology, so the encoder is penalized for changing the multi-scale topological shape of the data — components, loops, voids — not just its pairwise distances or reconstruction error.',
+    stack: ['Python', 'PyTorch', 'torch-topological', 'GUDHI', 'ripser', 'scikit-learn'],
+    status: 'public-code',
+    featured: true,
+    metrics: [
+      { label: 'TDA backend', value: 'torch-topological + giotto-ph' },
+      { label: 'Homology', value: 'H0, H1, H2 (Wasserstein)' },
+      { label: 'Tests', value: '8/8 passing' },
+    ],
+    body: {
+      problem:
+        "A reconstruction-only or pairwise-distance-only latent space objective has no notion of shape: it can tear a loop open or merge two components together as long as the decoder can still invert the damage, because nothing in the loss distinguishes a topologically essential distortion from incidental local noise.",
+      approach:
+        "Adds a differentiable persistent-homology term to training: for every minibatch, a farthest-point-sampled landmark subset has its Vietoris-Rips persistence diagrams (H0/H1/H2) computed in both ambient and latent space via torch-topological, and the 2-Wasserstein distance between the two — chosen over a persistence-landscape distance specifically for the diagram stability theorem's Lipschitz guarantee — is added to the reconstruction loss. main.py ablates it directly against a vanilla autoencoder and an L2 pairwise-distance regularizer on the same architecture and seed.",
+      architecture:
+        "torch_topological.nn.VietorisRipsComplex (backed by giotto-ph) supplies the differentiable diagrams — filtration values are read off the live, gradient-tracked coordinate tensor while the discrete simplex pairing is treated as constant per forward pass, the standard trick for backpropagating through persistent homology. ripser provides a separate, non-differentiable reference path used only for evaluation and plotting, never for the training loss. Landmark subsampling (greedy farthest-point selection, not uniform random) keeps the Rips computation tractable on CPU, since persistent homology has no GPU/MPS acceleration and was measured to be the actual training bottleneck — roughly 20ms for H0–H2 on a full 128-point batch versus 2ms on a 48-point landmark subset.",
+      results:
+        "8/8 tests pass (gradient flow through the full topological pipeline, correct H0/H1 detection on synthetic clusters and loops, landmark-sampling coverage); on a noisy 2-torus autoencoded down to R², the topological regularizer's Wasserstein gaps for H0 and H1 came in below both baselines' at roughly 3-4x the wall-clock cost per epoch — the ablation is built to make that cost/fidelity trade-off visible, not to claim a universal win.",
+      limits:
+        "Two real engineering constraints surfaced while building this, not while benchmarking it: torch-topological's Rips backend (giotto-ph) has no Python 3.13 wheel yet, and its WassersteinDistance divides by zero when a homology dimension is empty on both sides (common for H2 early in training), which needed an explicit short-circuit fix. Betti-number preservation results are single-seed and dataset-size-sensitive at this scale, flagged as illustrative in the README rather than a benchmark claim; and a 2D latent space structurally cannot preserve a torus's H2 void regardless of regularizer strength — a topological obstruction, not a training failure.",
+    },
+    links: { code: 'https://github.com/flaviagaglio/topological-latent-regularizer' },
+  },
+  {
     slug: 'male-infertility-prediction',
     title: 'Male Infertility Prediction from Clinical Andrology Data',
     category: 'ml',
