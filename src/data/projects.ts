@@ -461,6 +461,34 @@ export const projects: Project[] = [
     links: { demo: 'https://flaviagaglio.github.io/tic-tac-toe/', code: 'https://github.com/flaviagaglio/tic-tac-toe' },
   },
   {
+    slug: 'kobo-drop',
+    title: 'Kobo Drop — Wireless EPUB Transfer to Kobo',
+    category: 'systems',
+    summary:
+      "Replaces USB/Calibre for getting an EPUB onto a Kobo: open the site once on the e-reader's own browser and it shows a 4-digit code; pick the file on your phone, type the code, send — the Kobo (silently polling the same page) picks it up and offers it as a one-tap library download, even when the two devices are on completely different networks.",
+    stack: ['TypeScript', 'Cloudflare Workers', 'R2', 'Workers KV'],
+    status: 'public-code',
+    featured: false,
+    metrics: [
+      { label: 'Codes', value: '4-digit, single-use' },
+      { label: 'Storage', value: 'R2, deleted post-download' },
+      { label: 'No-JS fallback', value: 'meta-refresh polling' },
+    ],
+    body: {
+      problem:
+        "USB transfers and Calibre assume both devices are physically tethered or on the same network — neither holds when the phone is out and about on cellular and the Kobo was left on home WiFi. The e-reader's own browser is also the wrong place to type anything: an old, limited WebKit build with a slow on-screen keyboard, especially on symbols.",
+      approach:
+        "Split the friction across the two devices instead of forcing it onto the constrained one. The Kobo only ever displays a passive 4-digit numeric code and polls for arrival — never types anything. All the input (file picker, code entry) happens on the phone's modern browser, which can afford real UI: upload progress from an XHR `progress` event, then a second poll confirming the Kobo actually finished the download, not just that the upload succeeded.",
+      architecture:
+        "A Cloudflare Worker with no server to keep running: R2 holds the EPUB between upload and download, Workers KV maps code → session state with TTLs doing the cleanup (10 minutes unused, 48 hours once a file is ready). The EPUB itself is validated by hand-parsing the ZIP local-file header for a stored, uncompressed `mimetype` entry containing `application/epub+zip` — real content validation, not a trust-the-extension check. The Kobo-facing page is deliberately dependency-free HTML/CSS with a `setInterval`+`fetch` poll wrapped in a feature-detecting try/catch, backed by a `<meta http-equiv=\"refresh\">` tag so the page still resolves to the download link on a full reload even if the JS never runs at all.",
+      results:
+        "A working single-use handoff: the download endpoint streams the file with the exact `Content-Type`/`Content-Disposition` headers the Kobo browser needs to offer a real library import, then deletes the R2 object and marks the code consumed in the same request — verified end-to-end locally with byte-identical uploads/downloads, wrong-code and invalid-EPUB rejections, and single-use enforcement (a second download attempt correctly 409s).",
+      limits:
+        "EPUB→KEPUB conversion (Kobo's native format, used for accurate page counts and highlighting) isn't implemented — a plain EPUB reads fine on Kobo regardless, and porting `kepubify`'s marker injection into a Worker wasn't worth it for the workflow this replaces. The optional Web Share Target integration (share an EPUB from another app straight into the flow) needs the site installed as a PWA to appear in Android's share sheet.",
+    },
+    links: { code: 'https://github.com/flaviagaglio/kobo-drop' },
+  },
+  {
     slug: 'wireless-sensor-network',
     title: 'Wireless Sensor Network for Dehumidifier Control',
     category: 'systems',

@@ -22,6 +22,11 @@ const education = [
     body: 'Built the foundations: algorithms, systems, databases and networking, alongside a thesis on vulnerability analysis in biometric systems.',
   },
   {
+    title: 'First-Level University Master, Logical-Mathematical Disciplines',
+    meta: 'Ongoing',
+    body: 'Postgraduate specialization in logical and mathematical methods, pursued alongside the Master’s in AI & Cybersecurity.',
+  },
+  {
     title: 'Master’s Degree, Artificial Intelligence & Cybersecurity',
     meta: 'Ongoing',
     body: 'Deepening machine learning, biometrics and security research, with coursework spanning model design, attack surfaces and defensive countermeasures.',
