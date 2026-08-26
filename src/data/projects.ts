@@ -467,7 +467,7 @@ export const projects: Project[] = [
     summary:
       "Replaces USB/Calibre for getting an EPUB onto a Kobo: open the site once on the e-reader's own browser and it shows a 4-digit code; pick the file on your phone, type the code, send — the Kobo (silently polling the same page) picks it up and offers it as a one-tap library download, even when the two devices are on completely different networks.",
     stack: ['TypeScript', 'Cloudflare Workers', 'R2', 'Workers KV'],
-    status: 'public-code',
+    status: 'live-demo',
     featured: false,
     metrics: [
       { label: 'Codes', value: '4-digit, single-use' },
@@ -486,7 +486,10 @@ export const projects: Project[] = [
       limits:
         "EPUB→KEPUB conversion (Kobo's native format, used for accurate page counts and highlighting) isn't implemented — a plain EPUB reads fine on Kobo regardless, and porting `kepubify`'s marker injection into a Worker wasn't worth it for the workflow this replaces. The optional Web Share Target integration (share an EPUB from another app straight into the flow) needs the site installed as a PWA to appear in Android's share sheet.",
     },
-    links: { code: 'https://github.com/flaviagaglio/kobo-drop' },
+    links: {
+      demo: 'https://kobo-drop.tic-tac-toe-worker.workers.dev/send',
+      code: 'https://github.com/flaviagaglio/kobo-drop',
+    },
   },
   {
     slug: 'wireless-sensor-network',
