@@ -28,7 +28,7 @@ const education = [
   },
   {
     title: 'Master’s Degree, Artificial Intelligence & Cybersecurity',
-    meta: 'Ongoing',
+    meta: 'Completed',
     body: 'Deepening machine learning, biometrics and security research, with coursework spanning model design, attack surfaces and defensive countermeasures.',
   },
 ];
