@@ -27,7 +27,7 @@ const education = [
     body: 'Postgraduate specialization in logical and mathematical methods, pursued alongside the Master’s in AI & Cybersecurity.',
   },
   {
-    title: 'Master’s Degree, Artificial Intelligence & Cybersecurity',
+    title: 'Master’s Degree, Computer Engineering (Artificial Intelligence & Cybersecurity)',
     meta: 'Completed',
     body: 'Deepening machine learning, biometrics and security research, with coursework spanning model design, attack surfaces and defensive countermeasures.',
   },
